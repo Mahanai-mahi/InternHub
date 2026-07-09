@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Failure Analyzer</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2><i class="fa-solid fa-graduation-cap"></i> InternHub</h2>
+
+<a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+
+<a href="student-profile.html"><i class="fa-solid fa-user"></i> My Profile</a>
+
+<a href="readiness-score.html"><i class="fa-solid fa-chart-line"></i> Readiness Score</a>
+
+<a href="failure-analyzer.html"><i class="fa-solid fa-chart-pie"></i> Failure Analyzer</a>
+
+<a href="timeline.html"><i class="fa-solid fa-timeline"></i> Journey Timeline</a>
+
+<a href="internships.html"><i class="fa-solid fa-briefcase"></i> Internships</a>
+
+<a href="my-applications.html"><i class="fa-solid fa-file-lines"></i> My Applications</a>
+<a href="login.html" onclick="logout()">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Logout
+</a>
+</div>
+
+<div class="readiness-container">
+
+<h1>
+<i class="fa-solid fa-magnifying-glass-chart"></i>
+Failure Analyzer
+</h1>
+
+<div class="internship-card">
+
+<h3>Possible Reasons for Rejection</h3>
+
+<div id="analysis"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const studentId = Number(localStorage.getItem("studentId"));
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+async function analyzeFailure(){
+
+    try{
+
+        // Load student
+        const studentResponse =
+        await fetch("http://localhost:8081/student/" + studentId);
+
+        const student = await studentResponse.json();
+
+        // Load all applications
+        const applicationResponse =
+        await fetch("http://localhost:8081/application/all");
+
+        const applications =
+        await applicationResponse.json();
+
+        // Student applications
+        const myApplications =
+        applications.filter(app => app.studentId == studentId);
+
+        let output = "";
+
+        // ========= PROFILE CHECK =========
+
+        if(!student.skills || student.skills.trim()==""){
+
+            output += "<p>❌ Add technical skills like Java, Spring Boot, MySQL, HTML and CSS.</p>";
+
+        }
+
+        if(!student.githubLink || student.githubLink.trim()==""){
+
+            output += "<p>❌ Upload your GitHub profile with at least 3 projects.</p>";
+
+        }
+
+        if(!student.linkedinLink || student.linkedinLink.trim()==""){
+
+            output += "<p>❌ Add your LinkedIn profile.</p>";
+
+        }
+
+        if(!student.resume || student.resume.trim()==""){
+
+            output += "<p>❌ Resume not uploaded.</p>";
+
+        }
+
+        // ========= APPLICATION CHECK =========
+
+        if(myApplications.length==0){
+
+            output += "<p>⚠ You have not applied for any internship yet.</p>";
+
+        }
+
+        const rejected =
+        myApplications.filter(a=>a.status==="Rejected").length;
+
+        const pending =
+        myApplications.filter(a=>a.status==="Pending").length;
+
+        const selected =
+        myApplications.filter(a=>a.status==="Selected").length;
+
+        if(rejected>0){
+
+            output += `<p>❌ You have ${rejected} rejected application(s). Improve your skills and resume before applying again.</p>`;
+
+        }
+
+        if(pending>0){
+
+            output += `<p>🟡 ${pending} application(s) are still under review. Keep preparing for interviews.</p>`;
+
+        }
+
+        if(selected>0){
+
+            output += `<p style="color:green;">🎉 Congratulations! You have been selected for ${selected} internship(s).</p>`;
+
+        }
+
+        // ========= FINAL MESSAGE =========
+
+        if(output==""){
+
+            output = `
+            <h2 style="color:green;">
+            ✅ Excellent! Your profile looks complete.
+            </h2>
+
+            <p>
+            🚀 Keep applying for internships and continue improving your projects.
+            </p>
+            `;
+
+        }
+
+        document.getElementById("analysis").innerHTML=output;
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        document.getElementById("analysis").innerHTML=
+        "<p>❌ Unable to analyze your profile.</p>";
+
+    }
+
+}
+
+analyzeFailure();
+
+</script>
+
+</body>
+
+</html>

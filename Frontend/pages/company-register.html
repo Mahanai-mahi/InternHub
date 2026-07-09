@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Company Register</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Company Registration</h1>
+
+        <form id="registerForm">
+
+            <input type="text" id="companyName" placeholder="Company Name" required>
+
+            <input type="email" id="email" placeholder="Company Email" required>
+
+            <input type="password" id="password" placeholder="Password" required>
+
+            <input type="text" id="location" placeholder="Location" required>
+
+            <input type="text" id="industry" placeholder="Industry" required>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <div class="link">
+
+            <a href="company-login.html">
+                Already Registered? Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("registerForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const company = {
+
+        companyName: document.getElementById("companyName").value,
+
+        email: document.getElementById("email").value,
+
+        password: document.getElementById("password").value,
+
+        location: document.getElementById("location").value,
+
+        industry: document.getElementById("industry").value
+
+    };
+
+    const response = await fetch("http://localhost:8081/company/register",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify(company)
+
+    });
+
+    if(response.ok){
+
+        alert("Company Registered Successfully!");
+
+        window.location.href="company-login.html";
+
+    }else{
+
+        alert("Registration Failed!");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

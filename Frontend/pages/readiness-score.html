@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Readiness Score</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="student-profile.html">
+        <i class="fa-solid fa-user"></i>
+        My Profile
+    </a>
+
+    <a href="readiness-score.html">
+        <i class="fa-solid fa-chart-line"></i>
+        Readiness Score
+    </a>
+
+    <a href="failure-analyzer.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        Failure Analyzer
+    </a>
+
+    <a href="timeline.html">
+        <i class="fa-solid fa-timeline"></i>
+        Journey Timeline
+    </a>
+
+    <a href="internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Internships
+    </a>
+
+    <a href="my-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        My Applications
+    </a>
+
+    <a href="login.html" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+<div class="readiness-container">
+
+    <h1>
+        <i class="fa-solid fa-chart-line"></i>
+        Internship Readiness Score
+    </h1>
+
+    <div class="internship-card">
+
+        <h3>Your Skills</h3>
+
+        <p id="studentSkillsText">
+
+            Loading your skills...
+
+        </p>
+
+        <br>
+
+        <button onclick="calculateScore()">
+
+            <i class="fa-solid fa-calculator"></i>
+
+            Calculate Readiness
+
+        </button>
+
+    </div>
+
+    <br>
+
+    <div class="score-circle" id="scoreCircle">
+
+        0%
+
+    </div>
+
+    <br>
+
+    <div class="progress-container">
+
+        <div class="progress-bar" id="progressBar"></div>
+
+    </div>
+
+    <br>
+
+    <div class="results-grid">
+
+        <div class="result-card">
+
+            <h2 style="color:#22C55E;">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Matched Skills
+
+            </h2>
+
+            <div id="matchedSkills"></div>
+
+        </div>
+
+        <div class="result-card">
+
+            <h2 style="color:#EF4444;">
+
+                <i class="fa-solid fa-circle-xmark"></i>
+
+                Missing Skills
+
+            </h2>
+
+            <div id="missingSkills"></div>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="suggestions">
+
+        <h2>
+
+            <i class="fa-solid fa-lightbulb"></i>
+
+            Recommendations
+
+        </h2>
+
+        <ul id="suggestionsList"></ul>
+
+    </div>
+
+</div>
+
+<script>
+const studentId = localStorage.getItem("studentId");
+
+let studentSkills=[];
+
+async function loadStudentSkills(){
+
+    try{
+
+        const response=await fetch(
+
+            "http://localhost:8081/student/"+studentId
+
+        );
+
+        const student=await response.json();
+
+        if(student.skills==null || student.skills.trim()==""){
+
+            document.getElementById("studentSkillsText").innerHTML=
+
+            "<span style='color:red;'>No skills found. Please update your profile.</span>";
+
+            return;
+
+        }
+
+        document.getElementById("studentSkillsText").innerHTML=
+
+        student.skills;
+
+        studentSkills=student.skills
+
+        .toLowerCase()
+
+        .split(",")
+
+        .map(skill=>skill.trim());
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Unable to load skills.");
+
+    }
+
+}
+
+function calculateScore(){
+
+    if(studentSkills.length==0){
+
+        alert("Please update your skills first.");
+
+        return;
+
+    }
+
+    const requiredSkills=
+
+    localStorage.getItem("requiredSkills");
+
+    if(requiredSkills==null){
+
+        alert("Please choose an internship first.");
+
+        window.location.href="internships.html";
+
+        return;
+
+    }
+
+    const required=requiredSkills
+
+    .toLowerCase()
+
+    .split(",")
+
+    .map(skill=>skill.trim());
+
+    let matched=0;
+
+    let completed="";
+
+    let missing="";
+
+    let suggestions="";
+
+    required.forEach(skill=>{
+
+        if(studentSkills.includes(skill)){
+
+            matched++;
+
+            completed+=
+
+            "<div class='completed'>✅ "+skill+"</div>";
+
+        }
+
+        else{
+
+            missing+=
+
+            "<div class='missing'>❌ "+skill+"</div>";
+
+            suggestions+=
+
+            "<li>Learn <b>"+skill+"</b></li>";
+
+        }
+
+    });
+
+    const score=Math.round(
+
+    (matched/required.length)*100
+
+    );
+
+    const circle=document.getElementById("scoreCircle");
+
+    circle.innerHTML=score+"%";
+
+    if(score>=80){
+
+        circle.style.background="#22C55E";
+
+    }
+
+    else if(score>=50){
+
+        circle.style.background="#F59E0B";
+
+    }
+
+    else{
+
+        circle.style.background="#EF4444";
+
+    }
+
+    document.getElementById("progressBar").style.width=
+
+    score+"%";
+
+    document.getElementById("matchedSkills").innerHTML=
+
+    completed;
+
+    document.getElementById("missingSkills").innerHTML=
+
+    missing;
+
+    document.getElementById("suggestionsList").innerHTML=
+
+    suggestions;
+
+}
+
+loadStudentSkills();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>Admin Login</h1>
+
+        <form id="adminLoginForm">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Admin Email"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("adminLoginForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const admin = {
+
+        email: document.getElementById("email").value,
+
+        password: document.getElementById("password").value
+
+    };
+
+    try{
+
+        const response = await fetch("http://localhost:8081/admin/login",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(admin)
+
+        });
+
+        let data = null;
+
+const text = await response.text();
+
+if(text){
+    data = JSON.parse(text);
+}
+
+if(data && data.id){
+
+    localStorage.setItem("adminId", data.id);
+
+    localStorage.setItem("adminEmail", data.email);
+
+    alert("Login Successful!");
+
+    window.location.href="admin-dashboard.html";
+
+}
+else{
+
+    alert("Invalid Email or Password!");
+
+}
+
+    }
+    catch(error){
+
+        console.log(error);
+
+        alert("Server Error!");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

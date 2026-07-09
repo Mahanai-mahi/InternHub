@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Students</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="admin-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="manage-students.html">
+        <i class="fa-solid fa-user-graduate"></i>
+        Manage Students
+    </a>
+
+    <a href="manage-companies.html">
+        <i class="fa-solid fa-building"></i>
+        Manage Companies
+    </a>
+
+    <a href="manage-admin-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="manage-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        Applications
+    </a>
+
+    <a href="admin-login.html">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+    <h1>
+        <i class="fa-solid fa-user-graduate"></i>
+        Manage Students
+    </h1>
+
+    <div id="studentList"></div>
+
+</div>
+
+<script>
+
+async function loadStudents(){
+
+    const response =
+        await fetch("http://localhost:8081/student/all");
+
+    const students = await response.json();
+
+    let output="";
+
+    students.forEach(student=>{
+
+        output+=`
+
+        <div class="internship-card">
+
+            <h2>
+                <i class="fa-solid fa-user-circle"></i>
+                ${student.name}
+            </h2>
+
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                <b>Email :</b> ${student.email}
+            </p>
+
+            <p>
+                <i class="fa-solid fa-code-branch"></i>
+                <b>Branch :</b> ${student.branch ?? "Not Updated"}
+            </p>
+
+            <p>
+                <i class="fa-solid fa-laptop-code"></i>
+                <b>Skills :</b> ${student.skills ?? "Not Updated"}
+            </p>
+
+            <button
+            onclick="deleteStudent(${student.id})">
+
+            <i class="fa-solid fa-trash"></i>
+
+            Delete Student
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("studentList").innerHTML=output;
+
+}
+
+async function deleteStudent(id){
+
+    if(!confirm("Delete this student?")) return;
+
+    const response=await fetch(
+
+    "http://localhost:8081/student/delete/"+id,
+
+    {
+
+        method:"DELETE"
+
+    });
+
+    if(response.ok){
+
+        alert("Student Deleted Successfully!");
+
+        loadStudents();
+
+    }
+
+    else{
+
+        alert("Delete Failed!");
+
+    }
+
+}
+
+loadStudents();
+
+</script>
+
+</body>
+
+</html>

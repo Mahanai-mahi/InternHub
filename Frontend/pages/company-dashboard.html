@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Dashboard</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-building"></i>
+        InternHub
+    </h2>
+
+    <a href="company-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="post-internship.html">
+        <i class="fa-solid fa-plus"></i>
+        Post Internship
+    </a>
+
+    <a href="manage-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="view-applicants.html">
+        <i class="fa-solid fa-users"></i>
+        View Applicants
+    </a>
+
+    <a href="company-login.html">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+    <h1>Welcome Company 👋</h1>
+
+    <div class="dashboard-cards">
+
+        <div class="card internship">
+            <h2 id="internshipCount">0</h2>
+            <p>Total Internships</p>
+        </div>
+
+        <div class="card applied">
+            <h2 id="applicationCount">0</h2>
+            <p>Total Applications</p>
+        </div>
+
+        <div class="card selected">
+            <h2 id="selectedCount">0</h2>
+            <p>Selected Students</p>
+        </div>
+
+        <div class="card rejected">
+            <h2 id="rejectedCount">0</h2>
+            <p>Rejected Students</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function loadDashboard() {
+
+    try {
+
+        // Total Internships
+       const internshipResponse =
+    await fetch("http://localhost:8081/api/internships");
+        const internships =
+            await internshipResponse.json();
+
+        document.getElementById("internshipCount").innerText =
+            internships.length;
+
+        // Total Applications
+        const applicationResponse =
+            await fetch("http://localhost:8081/application/all");
+
+        const applications =
+            await applicationResponse.json();
+
+        document.getElementById("applicationCount").innerText =
+            applications.length;
+
+        // Selected Students
+        const selected =
+            applications.filter(a => a.status === "Selected");
+
+        document.getElementById("selectedCount").innerText =
+            selected.length;
+
+        // Rejected Students
+        const rejected =
+            applications.filter(a => a.status === "Rejected");
+
+        document.getElementById("rejectedCount").innerText =
+            rejected.length;
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Unable to load dashboard.");
+
+    }
+
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>

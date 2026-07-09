@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Internship</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-building"></i>
+        InternHub
+    </h2>
+
+    <a href="company-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="post-internship.html">
+        <i class="fa-solid fa-plus"></i>
+        Post Internship
+    </a>
+
+    <a href="manage-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="view-applicants.html">
+        <i class="fa-solid fa-users"></i>
+        View Applicants
+    </a>
+
+    <a href="company-login.html">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+    <h1>Post Internship</h1>
+
+    <div class="internship-card">
+
+        <input type="text" id="title" placeholder="Internship Title"><br><br>
+
+        <input type="text" id="company" placeholder="Company Name"><br><br>
+
+        <input type="text" id="duration" placeholder="Duration"><br><br>
+
+        <input type="number" id="stipend" placeholder="Stipend"><br><br>
+
+        <input type="text" id="skills" placeholder="Required Skills"><br><br>
+
+        <textarea id="description"
+                  placeholder="Internship Description"
+                  rows="5"></textarea><br><br>
+
+        <button onclick="postInternship()">
+            Post Internship
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+async function postInternship() {
+
+    const internship = {
+
+        title: document.getElementById("title").value,
+
+        company: document.getElementById("company").value,
+
+        duration: document.getElementById("duration").value,
+
+        stipend: parseFloat(document.getElementById("stipend").value),
+
+        requiredSkills: document.getElementById("skills").value,
+
+        description: document.getElementById("description").value
+
+    };
+
+    try {
+
+        const response = await fetch(
+    "http://localhost:8081/api/internships",
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(internship)
+
+            });
+
+        if(response.ok){
+
+            alert("Internship Posted Successfully!");
+
+            document.getElementById("title").value="";
+            document.getElementById("company").value="";
+            document.getElementById("duration").value="";
+            document.getElementById("stipend").value="";
+            document.getElementById("skills").value="";
+            document.getElementById("description").value="";
+
+        }
+        else{
+
+            alert("Failed to Post Internship!");
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert("Server Error!");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="admin-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="manage-students.html">
+        <i class="fa-solid fa-user-graduate"></i>
+        Manage Students
+    </a>
+
+    <a href="manage-companies.html">
+        <i class="fa-solid fa-building"></i>
+        Manage Companies
+    </a>
+
+    <a href="manage-admin-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="manage-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        Applications
+    </a>
+
+    <a href="#" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+
+<div class="dashboard">
+
+    <h1>
+        👋 Welcome Back, Admin
+    </h1>
+
+    <p class="dashboard-subtitle">
+        Manage students, companies, internships and applications from one place.
+    </p>
+
+    <div class="dashboard-cards">
+
+        <div class="card internship">
+
+            <i class="fa-solid fa-user-graduate dashboard-icon"></i>
+
+            <h2 id="studentCount">0</h2>
+
+            <p>Total Students</p>
+
+        </div>
+
+        <div class="card applied">
+
+            <i class="fa-solid fa-building dashboard-icon"></i>
+
+            <h2 id="companyCount">0</h2>
+
+            <p>Total Companies</p>
+
+        </div>
+
+        <div class="card selected">
+
+            <i class="fa-solid fa-briefcase dashboard-icon"></i>
+
+            <h2 id="internshipCount">0</h2>
+
+            <p>Total Internships</p>
+
+        </div>
+
+        <div class="card rejected">
+
+            <i class="fa-solid fa-file-lines dashboard-icon"></i>
+
+            <h2 id="applicationCount">0</h2>
+
+            <p>Total Applications</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function loadDashboard(){
+
+    try{
+
+        const students = await fetch("http://localhost:8081/student/all");
+        console.log("Students:", students.status);
+
+        const companies = await fetch("http://localhost:8081/company/all");
+        console.log("Companies:", companies.status);
+
+        const internships = await fetch("http://localhost:8081/api/internships");
+        console.log("Internships:", internships.status);
+
+        const applications = await fetch("http://localhost:8081/application/all");
+        console.log("Applications:", applications.status);
+
+        const studentData = await students.json();
+        const companyData = await companies.json();
+        const internshipData = await internships.json();
+        const applicationData = await applications.json();
+
+        console.log(studentData);
+        console.log(companyData);
+        console.log(internshipData);
+        console.log(applicationData);
+
+        document.getElementById("studentCount").innerText = studentData.length;
+        document.getElementById("companyCount").innerText = companyData.length;
+        document.getElementById("internshipCount").innerText = internshipData.length;
+        document.getElementById("applicationCount").innerText = applicationData.length;
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+function logout(){
+
+    localStorage.removeItem("adminId");
+    localStorage.removeItem("adminEmail");
+
+    window.location.href="admin-login.html";
+
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>

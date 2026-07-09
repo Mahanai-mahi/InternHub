@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="student-profile.html">
+        <i class="fa-solid fa-user"></i>
+        My Profile
+    </a>
+
+    <a href="readiness-score.html">
+        <i class="fa-solid fa-chart-line"></i>
+        Readiness Score
+    </a>
+
+    <a href="failure-analyzer.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        Failure Analyzer
+    </a>
+
+    <a href="timeline.html">
+        <i class="fa-solid fa-timeline"></i>
+        Journey Timeline
+    </a>
+
+    <a href="internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Internships
+    </a>
+
+    <a href="my-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        My Applications
+    </a>
+
+    <a href="login.html" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+    <h1>My Applications</h1>
+
+    <div id="applicationList"></div>
+
+</div>
+
+<script>
+function logout(){
+
+    localStorage.clear();
+
+    window.location.href="login.html";
+
+}
+async function loadApplications() {
+
+    const container = document.getElementById("applicationList");
+
+    const studentId = localStorage.getItem("studentId");
+
+    if (!studentId) {
+
+        alert("Please Login First!");
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
+    try {
+
+        const response = await fetch("http://localhost:8081/application/all");
+
+        if (!response.ok) {
+
+            throw new Error("Failed to fetch applications");
+
+        }
+
+        const applications = await response.json();
+
+        container.innerHTML = "";
+
+        const myApplications = applications.filter(app => app.studentId == studentId);
+
+        if(myApplications.length === 0){
+
+            container.innerHTML = "<h2>No Applications Yet!</h2>";
+
+            return;
+
+        }
+
+        for (const application of myApplications) {
+            
+            const internshipResponse = await fetch(
+`http://localhost:8081/api/internships/${application.internshipId}`
+);
+            if (!internshipResponse.ok) {
+
+                continue;
+
+            }
+
+            const internship = await internshipResponse.json();
+
+            container.innerHTML += `
+
+                <div class="internship-card">
+
+                    <h2>${internship.title}</h2>
+
+                    <p><strong>Company:</strong> ${internship.company}</p>
+
+                    <p><strong>Duration:</strong> ${internship.duration}</p>
+
+                    <p><strong>Stipend:</strong> ₹${internship.stipend}/month</p>
+
+                    <p><strong>Skills:</strong> ${internship.requiredSkills}</p>
+
+                    <p><strong>Status:</strong> ${application.status}</p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        container.innerHTML =
+        "<h2 style='color:white;'>Unable to load applications.</h2>";
+
+    }
+
+}
+
+loadApplications();
+
+</script>
+
+</body>
+</html>

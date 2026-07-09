@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Internships</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>InternHub</h2>
+
+    <a href="admin-dashboard.html">Dashboard</a>
+
+    <a href="manage-students.html">Manage Students</a>
+
+    <a href="manage-companies.html">Manage Companies</a>
+
+    <a href="manage-admin-internships.html">Manage Internships</a>
+
+    <a href="manage-applications.html">Applications</a>
+
+    <a href="admin-login.html">Logout</a>
+
+</div>
+
+<div class="internships-container">
+
+    <h1>Manage Internships</h1>
+
+    <div id="internshipList"></div>
+
+</div>
+
+<script>
+
+async function loadInternships(){
+
+   const response = await fetch("http://localhost:8081/api/internships");
+    const internships = await response.json();
+
+    let output = "";
+
+    internships.forEach(internship=>{
+
+        output += `
+
+        <div class="internship-card">
+
+            <h2>${internship.title}</h2>
+
+            <p><b>Company :</b> ${internship.company}</p>
+
+            <p><b>Duration :</b> ${internship.duration}</p>
+
+            <p><b>Stipend :</b> ₹${internship.stipend}</p>
+
+            <p><b>Skills :</b> ${internship.requiredSkills}</p>
+
+            <p>${internship.description}</p>
+
+            <button onclick="deleteInternship(${internship.internshipId})">
+
+                Delete Internship
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("internshipList").innerHTML = output;
+
+}
+
+async function deleteInternship(id){
+
+    if(!confirm("Delete this internship?")){
+
+        return;
+
+    }
+
+    const response = await fetch(
+
+       "http://localhost:8081/api/internships/" + id, 
+
+        {
+
+            method:"DELETE"
+
+        }
+
+    );
+
+    if(response.ok){
+
+        alert("Internship Deleted Successfully!");
+
+        loadInternships();
+
+    }else{
+
+        alert("Delete Failed!");
+
+    }
+
+}
+
+loadInternships();
+
+</script>
+
+</body>
+
+</html>

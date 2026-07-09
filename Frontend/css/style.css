@@ -1,0 +1,3262 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===========================
+   INTERNHUB COLOR THEME
+=========================== */
+
+:root{
+
+    --primary:#0D273D;
+
+    --secondary:#3E6985;
+
+    --accent:#8AA7BC;
+
+    --light:#A6BED1;
+
+    --background:#CDD7DF;
+
+    --white:#FFFFFF;
+
+    --black:#111827;
+
+}
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+    min-height:100vh;
+
+    margin:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(135deg,
+        var(--primary),
+        var(--secondary),
+        var(--accent),
+        var(--light));
+
+    background-size:300% 300%;
+
+    animation:gradientBG 10s ease infinite;
+
+}
+
+@keyframes gradientBG{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+.container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+}
+
+.form-box{
+
+    width:380px;
+
+    padding:40px;
+
+    background:rgba(255,255,255,0.18);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:22px;
+
+    box-shadow:0 15px 35px rgba(13,39,61,.25);
+
+    text-align:center;
+
+    color:var(--white);
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.form-box h1{
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+    font-weight:700;
+
+    color:var(--white);
+
+    letter-spacing:1px;
+
+}
+
+.form-box p{
+
+    font-size:15px;
+
+    margin-bottom:25px;
+
+    color:rgba(255,255,255,0.9);
+
+}
+
+form{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+form input{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border:2px solid rgba(255,255,255,0.15);
+
+    border-radius:12px;
+
+    outline:none;
+
+    background:rgba(255,255,255,0.15);
+
+    color:var(--white);
+
+    font-size:15px;
+
+    transition:all .3s ease;
+
+}
+
+form input::placeholder{
+
+    color:rgba(255,255,255,0.75);
+
+}
+
+form input:focus{
+
+    background:rgba(255,255,255,0.25);
+
+    border-color:var(--light);
+
+    box-shadow:0 0 12px rgba(166,190,209,.6);
+
+    transform:translateY(-2px);
+
+}
+form button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:var(--white);
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .3s ease;
+
+    box-shadow:0 8px 20px rgba(13,39,61,.25);
+
+}
+
+form button:hover{
+
+    background:var(--secondary);
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(62,105,133,.35);
+
+}
+
+form button:active{
+
+    transform:scale(.98);
+
+}
+
+.link{
+
+    margin-top:20px;
+
+}
+
+.link a{
+
+    color:var(--white);
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    transition:all .3s ease;
+
+}
+
+.link a:hover{
+
+    color:var(--light);
+
+    letter-spacing:.6px;
+
+}
+/* HERO BUTTON */
+
+.hero button{
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+    color:var(--white);
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+    box-shadow:0 10px 25px rgba(13,39,61,.25);
+
+}
+
+.hero button:hover{
+
+    background:linear-gradient(135deg,var(--secondary),var(--accent));
+
+    transform:translateY(-5px) scale(1.05);
+
+    box-shadow:0 15px 30px rgba(62,105,133,.35);
+
+}
+
+/* ===========================
+   STATISTICS SECTION
+=========================== */
+
+.stats{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+    padding:80px 40px;
+
+}
+
+.stat-box{
+
+    width:220px;
+
+    padding:30px;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    color:var(--white);
+
+    box-shadow:0 12px 25px rgba(13,39,61,.18);
+
+    transition:all .35s ease;
+
+}
+
+.stat-box:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 18px 35px rgba(13,39,61,.25);
+
+}
+
+.stat-box h2{
+
+    font-size:40px;
+
+    margin-bottom:10px;
+
+    color:var(--white);
+
+}
+
+.stat-box p{
+
+    color:rgba(255,255,255,.90);
+
+    font-size:16px;
+
+}
+
+/* ===========================
+   FEATURES SECTION
+=========================== */
+
+.features{
+
+    padding:100px 50px;
+
+    text-align:center;
+
+    color:var(--white);
+
+}
+
+.features h2{
+
+    font-size:45px;
+
+    margin-bottom:60px;
+
+    color:var(--white);
+
+    letter-spacing:1px;
+
+}
+
+.feature-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+}
+
+.feature-card{
+
+    width:320px;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    box-shadow:0 12px 30px rgba(13,39,61,.18);
+
+    transition:all .35s ease;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-12px) scale(1.03);
+
+    box-shadow:0 20px 40px rgba(13,39,61,.28);
+
+}
+
+.feature-card h3{
+
+    font-size:26px;
+
+    margin-bottom:20px;
+
+    color:var(--white);
+
+}
+
+.feature-card p{
+
+    font-size:16px;
+
+    line-height:1.8;
+
+    color:rgba(255,255,255,.92);
+
+}
+/* ===========================
+   CONTACT SECTION
+=========================== */
+
+.contact{
+
+    padding:100px 20px;
+
+    text-align:center;
+
+    color:var(--white);
+
+}
+
+.contact h2{
+
+    font-size:45px;
+
+    margin-bottom:20px;
+
+    color:var(--white);
+
+    letter-spacing:1px;
+
+}
+
+.contact p{
+
+    font-size:18px;
+
+    margin-bottom:40px;
+
+    color:rgba(255,255,255,.92);
+
+}
+
+.contact-box{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+.contact-box input{
+
+    width:320px;
+
+    padding:15px;
+
+    border:2px solid rgba(255,255,255,.25);
+
+    border-radius:12px;
+
+    outline:none;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(15px);
+
+    color:var(--white);
+
+    transition:all .3s ease;
+
+}
+
+.contact-box input::placeholder{
+
+    color:rgba(255,255,255,.75);
+
+}
+
+.contact-box input:focus{
+
+    border-color:var(--light);
+
+    box-shadow:0 0 15px rgba(166,190,209,.6);
+
+}
+
+.contact-box button{
+
+    padding:15px 30px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+    color:var(--white);
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+    box-shadow:0 10px 25px rgba(13,39,61,.25);
+
+}
+
+.contact-box button:hover{
+
+    background:linear-gradient(135deg,var(--secondary),var(--accent));
+
+    transform:translateY(-4px) scale(1.05);
+
+    box-shadow:0 15px 30px rgba(62,105,133,.35);
+
+}
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer{
+
+    background:rgba(13,39,61,.92);
+
+    backdrop-filter:blur(15px);
+
+    color:var(--white);
+
+    padding-top:60px;
+
+    margin-top:60px;
+
+    box-shadow:0 -8px 25px rgba(13,39,61,.25);
+
+}
+
+.footer-container{
+
+    display:flex;
+
+    justify-content:space-around;
+
+    flex-wrap:wrap;
+
+    gap:40px;
+
+    padding:20px 50px;
+
+}
+
+.footer-box{
+
+    max-width:260px;
+
+}
+
+.footer-box h3{
+
+    margin-bottom:20px;
+
+    font-size:24px;
+
+    color:var(--white);
+
+}
+
+.footer-box p{
+
+    line-height:1.8;
+
+    color:rgba(255,255,255,.85);
+
+}
+
+.footer-box a{
+
+    display:block;
+
+    color:rgba(255,255,255,.85);
+
+    text-decoration:none;
+
+    margin-bottom:12px;
+
+    transition:all .3s ease;
+
+}
+
+.footer-box a:hover{
+
+    color:var(--light);
+
+    transform:translateX(6px);
+
+}
+
+.social-icons{
+
+    display:flex;
+
+    gap:18px;
+
+    font-size:26px;
+
+}
+
+.social-icons a{
+
+    color:var(--white);
+
+    transition:all .3s ease;
+
+}
+
+.social-icons a:hover{
+
+    color:var(--light);
+
+    transform:translateY(-5px) scale(1.15);
+
+}
+
+.footer-bottom{
+
+    text-align:center;
+
+    padding:22px;
+
+    margin-top:40px;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+    color:rgba(255,255,255,.75);
+
+    font-size:15px;
+
+}
+/* ===========================
+   STICKY NAVBAR
+=========================== */
+
+.navbar.sticky{
+
+    background:rgba(13,39,61,.95);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 8px 25px rgba(13,39,61,.25);
+
+    transition:all .35s ease;
+
+}
+
+/* ===========================
+   SMOOTH SCROLL
+=========================== */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+/* ===========================
+   REVEAL ANIMATION
+=========================== */
+
+.card,
+.feature-card,
+.stat-box{
+
+    opacity:0;
+
+    transform:translateY(50px);
+
+    transition:all .8s ease;
+
+}
+
+.card.show,
+.feature-card.show,
+.stat-box.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ===========================
+   DASHBOARD
+=========================== */
+
+.dashboard{
+
+    padding:50px;
+
+    background:var(--background);
+
+    min-height:100vh;
+
+}
+
+.dashboard h1{
+
+    margin-bottom:30px;
+
+    color:var(--primary);
+
+    font-size:38px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+/* ===========================
+   DASHBOARD CARDS
+=========================== */
+
+.dashboard-cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+    margin-top:40px;
+
+}
+
+/* Dashboard Card */
+
+.card{
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 15px 30px rgba(13,39,61,.12);
+
+    transition:all .35s ease;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(13,39,61,.20);
+
+}
+
+/* Left Border Colors */
+
+.score{
+
+    border-left:6px solid var(--primary);
+
+}
+
+.applied{
+
+    border-left:6px solid var(--secondary);
+
+}
+
+.selected{
+
+    border-left:6px solid #2E8B57;
+
+}
+
+.rejected{
+
+    border-left:6px solid #D9534F;
+
+}
+
+/* Numbers */
+
+.dashboard .card h2{
+
+    font-size:42px;
+
+    margin-bottom:12px;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+}
+
+/* Card Text */
+
+.dashboard .card p{
+
+    font-size:17px;
+
+    color:#555;
+
+    font-weight:500;
+
+}
+/* ===========================
+   DASHBOARD CARD HOVER
+=========================== */
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+/* Dashboard Card Number */
+
+.card h2{
+
+    font-size:42px;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+}
+
+/* Dashboard Card Text */
+
+.card p{
+
+    font-size:18px;
+
+    color:#555;
+
+    line-height:1.6;
+
+}
+
+/* Force Dashboard Cards */
+
+.dashboard .card{
+
+    background:rgba(255,255,255,.95) !important;
+
+    color:var(--black) !important;
+
+    padding:25px !important;
+
+    border-radius:20px !important;
+
+    min-height:170px;
+
+    display:block !important;
+
+    border:none;
+
+    box-shadow:0 15px 30px rgba(13,39,61,.12);
+
+    transition:all .35s ease;
+
+}
+
+.dashboard .card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(13,39,61,.20);
+
+}
+
+/* ===========================
+   READINESS SCORE
+=========================== */
+
+.readiness-container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:50px;
+
+    background:var(--background);
+
+    min-height:100vh;
+
+}
+
+.readiness-container h1{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+    color:var(--primary);
+
+    font-size:38px;
+
+    font-weight:700;
+
+}
+
+/* ===========================
+   READINESS SCORE
+=========================== */
+
+.score-circle{
+
+    width:190px;
+
+    height:190px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:var(--white);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    margin:35px auto;
+
+    box-shadow:0 18px 35px rgba(13,39,61,.25);
+
+    transition:all .35s ease;
+
+}
+
+.score-circle:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 25px 45px rgba(13,39,61,.35);
+
+}
+
+/* Checklist */
+
+.checklist{
+
+    margin-top:35px;
+
+}
+
+/* Common Item */
+
+.item{
+
+    padding:16px 20px;
+
+    margin-bottom:15px;
+
+    border-radius:14px;
+
+    font-weight:500;
+
+    transition:all .3s ease;
+
+}
+
+/* Completed */
+
+.completed{
+
+    background:rgba(46,139,87,.15);
+
+    border-left:6px solid #2E8B57;
+
+    color:#1F5134;
+
+}
+
+/* Missing */
+
+.missing{
+
+    background:rgba(217,83,79,.12);
+
+    border-left:6px solid #D9534F;
+
+    color:#8A2C2C;
+
+}
+
+/* Suggestions */
+
+.suggestions{
+
+    margin-top:45px;
+
+    background:rgba(255,255,255,.85);
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:0 12px 25px rgba(13,39,61,.12);
+
+}
+
+.suggestions h2{
+
+    color:var(--primary);
+
+    margin-bottom:20px;
+
+}
+
+.suggestions ul{
+
+    padding-left:25px;
+
+}
+
+.suggestions li{
+
+    margin-bottom:12px;
+
+    color:#444;
+
+    line-height:1.7;
+
+}
+/* ===========================
+   FAILURE ANALYZER
+=========================== */
+
+.analysis-card{
+
+    max-width:900px;
+
+    margin:50px auto;
+
+    padding:35px;
+
+    background:rgba(255,255,255,.92);
+
+    border-radius:22px;
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.35);
+
+    box-shadow:0 15px 35px rgba(13,39,61,.15);
+
+    transition:all .35s ease;
+
+}
+
+.analysis-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(13,39,61,.22);
+
+}
+
+.analysis-card h2{
+
+    color:var(--primary);
+
+    font-size:32px;
+
+    margin-bottom:20px;
+
+    font-weight:700;
+
+}
+
+.analysis-card h3{
+
+    color:var(--secondary);
+
+    font-size:24px;
+
+    margin:20px 0 15px;
+
+    font-weight:600;
+
+}
+
+.analysis-card p{
+
+    color:#555;
+
+    line-height:1.8;
+
+    font-size:16px;
+
+}
+
+.analysis-card ul{
+
+    line-height:2;
+
+    padding-left:25px;
+
+}
+
+.analysis-card li{
+
+    color:#444;
+
+    margin-bottom:10px;
+
+    transition:.3s;
+
+}
+
+.analysis-card li:hover{
+
+    color:var(--primary);
+
+    transform:translateX(5px);
+
+}
+/* ===========================
+   JOURNEY TIMELINE
+=========================== */
+
+.timeline-container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:50px;
+
+    background:var(--background);
+
+    min-height:100vh;
+
+}
+
+.timeline-container h1{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+    color:var(--primary);
+
+    font-size:38px;
+
+    font-weight:700;
+
+}
+
+.timeline{
+
+    position:relative;
+
+    margin-left:50px;
+
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:20px;
+
+    top:0;
+
+    width:5px;
+
+    height:100%;
+
+    background:linear-gradient(
+        to bottom,
+        var(--primary),
+        var(--secondary)
+    );
+
+    border-radius:10px;
+
+}
+
+.timeline-item{
+
+    display:flex;
+
+    align-items:center;
+
+    margin-bottom:45px;
+
+    position:relative;
+
+    transition:all .35s ease;
+
+}
+
+.timeline-item:hover{
+
+    transform:translateX(10px);
+
+}
+
+.circle{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-right:20px;
+
+    font-weight:700;
+
+    color:var(--white);
+
+    box-shadow:0 8px 20px rgba(13,39,61,.25);
+
+}
+
+/* Completed */
+
+.completed .circle{
+
+    background:#2E8B57;
+
+}
+
+/* Current */
+
+.current .circle{
+
+    background:var(--secondary);
+
+}
+
+/* Future */
+
+.future .circle{
+
+    background:var(--accent);
+
+}
+/* ===========================
+   TIMELINE CONTENT
+=========================== */
+
+.content{
+
+    background:rgba(255,255,255,.92);
+
+    padding:20px 25px;
+
+    border-radius:18px;
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:0 12px 25px rgba(13,39,61,.12);
+
+    color:var(--black);
+
+    transition:all .35s ease;
+
+}
+
+.content:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 18px 35px rgba(13,39,61,.18);
+
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:270px;
+
+    height:100vh;
+
+    background:var(--primary);
+
+    color:var(--white);
+
+    padding:30px 20px;
+
+    box-shadow:8px 0 25px rgba(13,39,61,.25);
+
+}
+
+.sidebar h2{
+
+    font-size:38px;
+
+    margin-bottom:50px;
+
+    color:var(--white);
+
+    text-align:center;
+
+    letter-spacing:1px;
+
+}
+
+.sidebar a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    color:var(--white);
+
+    text-decoration:none;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+    border-radius:14px;
+
+    transition:all .35s ease;
+
+    font-size:18px;
+
+    font-weight:500;
+
+}
+
+.sidebar a:hover{
+
+    background:var(--secondary);
+
+    transform:translateX(8px);
+
+    box-shadow:0 8px 20px rgba(62,105,133,.35);
+
+}
+
+.sidebar i{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:18px;
+
+}
+
+.dashboard{
+
+    margin-left:290px;
+
+    padding:50px;
+
+    background:var(--background);
+
+    min-height:100vh;
+
+}
+/* ===========================
+   INTERNSHIPS
+=========================== */
+
+.internships-container{
+
+    margin-left:290px;
+
+    padding:50px;
+
+    background:var(--background);
+
+    min-height:100vh;
+
+}
+
+.internship-card{
+
+    background:rgba(255,255,255,.95);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(13,39,61,.12);
+
+    transition:all .35s ease;
+
+    margin-bottom:30px;
+
+    border-left:6px solid var(--primary);
+
+}
+
+.internship-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 22px 45px rgba(13,39,61,.20);
+
+}
+
+.internship-card h2{
+
+    color:var(--primary);
+
+    margin-bottom:15px;
+
+    font-size:28px;
+
+}
+
+.internship-card p{
+
+    color:#555;
+
+    line-height:1.8;
+
+    margin-bottom:10px;
+
+}
+
+.internship-card strong{
+
+    color:var(--secondary);
+
+}
+
+.internship-card button{
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:var(--white);
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    margin-top:15px;
+
+    margin-right:12px;
+
+    transition:all .35s ease;
+
+    box-shadow:0 10px 20px rgba(13,39,61,.20);
+
+}
+
+.internship-card button:hover{
+
+    background:linear-gradient(
+        135deg,
+        var(--secondary),
+        var(--accent)
+    );
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(13,39,61,.30);
+
+}
+/* ===========================
+   DASHBOARD (FINAL OVERRIDE)
+=========================== */
+
+.dashboard .card{
+
+    opacity:1 !important;
+
+    transform:none !important;
+
+    background:rgba(255,255,255,.95) !important;
+
+    color:var(--black) !important;
+
+    padding:25px !important;
+
+    border-radius:20px !important;
+
+    min-height:170px;
+
+    display:block !important;
+
+    box-shadow:0 15px 30px rgba(13,39,61,.12);
+
+    transition:all .35s ease;
+
+}
+
+.dashboard .card:hover{
+
+    transform:translateY(-8px) !important;
+
+    box-shadow:0 22px 45px rgba(13,39,61,.20);
+
+}
+
+.dashboard-cards{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+    margin-top:40px;
+
+}
+
+/* Card Colors */
+
+.score{
+
+    border-left:6px solid var(--primary);
+
+}
+
+.applied{
+
+    border-left:6px solid var(--secondary);
+
+}
+
+.selected{
+
+    border-left:6px solid #2E8B57;
+
+}
+
+.rejected{
+
+    border-left:6px solid #D9534F;
+
+}
+
+.internship{
+
+    border-left:6px solid var(--accent);
+
+}
+
+/* Heading */
+
+.dashboard h1{
+
+    color:var(--primary);
+
+    margin-bottom:35px;
+
+    font-size:38px;
+
+    font-weight:700;
+
+}
+
+/* Numbers */
+
+.dashboard .card h2{
+
+    font-size:42px;
+
+    margin-bottom:12px;
+
+    color:var(--primary);
+
+}
+
+/* Text */
+
+.dashboard .card p{
+
+    font-size:17px;
+
+    color:#555;
+
+}
+/* ===========================
+   INTERNSHIP BUTTONS
+=========================== */
+
+.internship-card button{
+
+    margin-right:12px;
+
+    margin-top:15px;
+
+}
+
+/* Internship Heading */
+
+.internship-card h3{
+
+    color:var(--primary);
+
+    font-size:24px;
+
+    font-weight:600;
+
+}
+
+/* Internship Text */
+
+.internship-card p{
+
+    color:#555;
+
+    line-height:1.8;
+
+}
+
+/* Page Heading */
+
+.internships-container h1{
+
+    color:var(--primary);
+
+    margin-bottom:35px;
+
+    font-size:38px;
+
+    font-weight:700;
+
+}
+
+/* ===========================
+   VIEW APPLICANTS
+=========================== */
+
+/* Select Button */
+
+.select-btn{
+
+    background:linear-gradient(
+        135deg,
+        #2E8B57,
+        #3CB371
+    );
+
+    color:var(--white);
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    margin-right:10px;
+
+    margin-top:10px;
+
+    font-weight:600;
+
+    transition:all .35s ease;
+
+    box-shadow:0 8px 18px rgba(46,139,87,.25);
+
+}
+
+.select-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(46,139,87,.35);
+
+}
+
+/* Reject Button */
+
+.reject-btn{
+
+    background:linear-gradient(
+        135deg,
+        #D9534F,
+        #C0392B
+    );
+
+    color:var(--white);
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+    font-weight:600;
+
+    transition:all .35s ease;
+
+    box-shadow:0 8px 18px rgba(217,83,79,.25);
+
+}
+
+.reject-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(217,83,79,.35);
+
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* ===========================
+   INTERNHUB THEME VARIABLES
+=========================== */
+
+:root{
+
+    --primary:#0D273D;
+
+    --secondary:#3E6985;
+
+    --accent:#8AA7BC;
+
+    --light:#A6BED1;
+
+    --background:#CDD7DF;
+
+    --white:#FFFFFF;
+
+    --black:#111827;
+
+    --success:#2E8B57;
+
+    --danger:#D9534F;
+
+    --warning:#F59E0B;
+
+    --info:#3E6985;
+
+    --glass:rgba(255,255,255,.18);
+
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+
+    width:260px;
+
+    background:var(--primary);
+
+    backdrop-filter:blur(18px);
+
+    border-right:1px solid rgba(255,255,255,.12);
+
+    box-shadow:8px 0 25px rgba(13,39,61,.25);
+
+}
+
+.sidebar h2{
+
+    font-size:32px;
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+    color:var(--white);
+
+    letter-spacing:1px;
+
+}
+
+.sidebar a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    color:var(--white);
+
+    text-decoration:none;
+
+    transition:all .35s ease;
+
+}
+
+.sidebar a:hover{
+
+    background:linear-gradient(
+        135deg,
+        var(--secondary),
+        var(--accent)
+    );
+
+    transform:translateX(8px);
+
+    box-shadow:0 8px 18px rgba(62,105,133,.30);
+
+}
+/* ===========================
+   DASHBOARD
+=========================== */
+
+.dashboard{
+
+    margin-left:290px;
+
+    padding:50px;
+
+    background:var(--background);
+
+    min-height:100vh;
+
+}
+
+.dashboard h1{
+
+    color:var(--primary);
+
+    margin-bottom:35px;
+
+    font-size:38px;
+
+    font-weight:700;
+
+}
+
+/* Dashboard Cards */
+
+.dashboard-cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+}
+
+.dashboard .card{
+
+    background:rgba(255,255,255,.95);
+
+    color:var(--black);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:0 15px 35px rgba(13,39,61,.15);
+
+    transition:all .35s ease;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.dashboard .card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 22px 45px rgba(13,39,61,.25);
+
+}
+
+.dashboard .card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:6px;
+
+}
+
+/* Card Colors */
+
+.internship::before{
+
+    background:var(--warning);
+
+}
+
+.applied::before{
+
+    background:var(--secondary);
+
+}
+
+.selected::before{
+
+    background:var(--success);
+
+}
+
+.rejected::before{
+
+    background:var(--danger);
+
+}
+
+.dashboard .card h2{
+
+    font-size:46px;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
+    font-weight:700;
+
+}
+
+.dashboard .card p{
+
+    color:#555;
+
+    font-size:17px;
+
+    line-height:1.6;
+
+}
+/* ===========================
+   INTERNSHIP CARD
+=========================== */
+
+.internship-card{
+
+    background:rgba(255,255,255,.95);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    margin-bottom:30px;
+
+    transition:all .35s ease;
+
+    border-left:6px solid var(--primary);
+
+    box-shadow:0 15px 35px rgba(13,39,61,.15);
+
+}
+
+.internship-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 22px 45px rgba(13,39,61,.25);
+
+}
+
+.internship-card h2,
+.internship-card h3{
+
+    color:var(--primary);
+
+    margin-bottom:15px;
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+.internship-card p{
+
+    color:#555;
+
+    line-height:1.8;
+
+    font-size:16px;
+
+}
+
+.internship-card strong{
+
+    color:var(--secondary);
+
+}
+
+.internship-card hr{
+
+    border:none;
+
+    height:1px;
+
+    background:#d9e3ea;
+
+    margin:18px 0;
+
+}
+/* ===========================
+   GLOBAL BUTTONS
+=========================== */
+
+button{
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:var(--white);
+
+    border:none;
+
+    padding:14px 30px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    transition:all .35s ease;
+
+    box-shadow:0 10px 20px rgba(13,39,61,.18);
+
+}
+
+button:hover{
+
+    background:linear-gradient(
+        135deg,
+        var(--secondary),
+        var(--accent)
+    );
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(13,39,61,.28);
+
+}
+
+/* ===========================
+   INPUTS & TEXTAREAS
+=========================== */
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid #d5dde5;
+
+    background:#ffffff;
+
+    color:#333;
+
+    font-size:16px;
+
+    margin-top:10px;
+
+    outline:none;
+
+    transition:all .3s ease;
+
+}
+
+input:focus,
+textarea:focus{
+
+    border-color:var(--secondary);
+
+    box-shadow:0 0 12px rgba(62,105,133,.25);
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#8b97a3;
+
+}
+/* ===========================
+   READINESS SCORE
+=========================== */
+
+.score-circle{
+
+    width:190px;
+
+    height:190px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:46px;
+
+    font-weight:700;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:var(--white);
+
+    box-shadow:0 18px 35px rgba(13,39,61,.22);
+
+    transition:all .35s ease;
+
+}
+
+.score-circle:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ===========================
+   TABLES
+=========================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:rgba(255,255,255,.96);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 35px rgba(13,39,61,.12);
+
+}
+
+table th{
+
+    background:var(--primary);
+
+    color:var(--white);
+
+    padding:16px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+table td{
+
+    padding:15px;
+
+    color:#555;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+table tr:hover{
+
+    background:#f4f8fb;
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#edf2f7;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--secondary);
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary);
+
+}
+/* ===========================
+   SIDEBAR ICONS
+=========================== */
+
+.sidebar a i{
+
+    width:22px;
+
+    margin-right:10px;
+
+    font-size:18px;
+
+    color:var(--white);
+
+}
+
+/* ===========================
+   DASHBOARD ICONS
+=========================== */
+
+.dashboard .card{
+
+    text-align:center;
+
+}
+
+.dashboard .card i{
+
+    color:var(--secondary);
+
+    margin-bottom:15px;
+
+    font-size:40px;
+
+}
+
+.dashboard .card h2{
+
+    font-size:48px;
+
+    margin:15px 0 10px;
+
+    color:var(--primary);
+
+}
+
+.dashboard .card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.dashboard h1{
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+/* Logo Icon */
+
+.sidebar h2 i{
+
+    color:var(--accent);
+
+}
+
+/* ===========================
+   STUDENT PAGE
+=========================== */
+
+.internship-card h2 i{
+
+    color:var(--secondary);
+
+    margin-right:10px;
+
+}
+
+.internship-card p i{
+
+    width:22px;
+
+    color:var(--accent);
+
+}
+
+/* Internship Buttons */
+
+.internship-card button{
+
+    margin-top:15px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:var(--white);
+
+    transition:all .35s ease;
+
+}
+
+.internship-card button:hover{
+
+    background:linear-gradient(
+        135deg,
+        var(--secondary),
+        var(--accent)
+    );
+
+    transform:translateY(-3px);
+
+}
+/* ===========================
+   INTERNSHIP DETAILS
+=========================== */
+
+.internship-card h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:var(--primary);
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.internship-card h2 i{
+
+    color:var(--secondary);
+
+    font-size:26px;
+
+}
+
+.internship-card p{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:12px 0;
+
+    color:#555;
+
+    line-height:1.7;
+
+}
+
+.internship-card p i{
+
+    color:var(--accent);
+
+    width:22px;
+
+    font-size:18px;
+
+}
+
+/* Buttons */
+
+.internship-card button{
+
+    margin-top:18px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:var(--white);
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:all .35s ease;
+
+    box-shadow:0 8px 18px rgba(13,39,61,.20);
+
+}
+
+.internship-card button:hover{
+
+    background:linear-gradient(
+        135deg,
+        var(--secondary),
+        var(--accent)
+    );
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(13,39,61,.30);
+
+}
+/* ===========================
+   STATUS BADGES
+=========================== */
+
+.status{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    color:var(--white);
+
+    font-weight:600;
+
+    margin:12px 0;
+
+    font-size:14px;
+
+    letter-spacing:.5px;
+
+}
+
+.pending{
+
+    background:var(--warning);
+
+}
+
+.selected{
+
+    background:var(--success);
+
+}
+
+.rejected{
+
+    background:var(--danger);
+
+}
+
+/* ===========================
+   ACTION BUTTONS
+=========================== */
+
+.select-btn{
+
+    background:linear-gradient(
+        135deg,
+        var(--success),
+        #3CB371
+    );
+
+    color:var(--white);
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:all .35s ease;
+
+    box-shadow:0 8px 18px rgba(46,139,87,.25);
+
+}
+
+.select-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(46,139,87,.35);
+
+}
+
+.reject-btn{
+
+    background:linear-gradient(
+        135deg,
+        var(--danger),
+        #C0392B
+    );
+
+    color:var(--white);
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:all .35s ease;
+
+    box-shadow:0 8px 18px rgba(217,83,79,.25);
+
+}
+
+.reject-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(217,83,79,.35);
+
+}
+
+/* Common Button Spacing */
+
+button{
+
+    margin-right:10px;
+
+}
+/* ===========================
+   DASHBOARD HEADER
+=========================== */
+
+.dashboard h1 span{
+
+    color:var(--accent);
+
+}
+
+.dashboard-subtitle{
+
+    color:#5f6f7f;
+
+    font-size:18px;
+
+    margin-bottom:35px;
+
+    font-weight:500;
+
+}
+
+.dashboard-icon{
+
+    font-size:40px;
+
+    margin-bottom:15px;
+
+    color:var(--secondary);
+
+}
+
+/* ===========================
+   DASHBOARD CARD TEXT
+=========================== */
+
+.card{
+
+    text-align:center;
+
+}
+
+.card h2{
+
+    font-size:48px;
+
+    margin:15px 0;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+}
+
+.card p{
+
+    color:#555;
+
+    font-size:17px;
+
+}
+/* ===========================
+   COMPANY HEADER
+=========================== */
+
+.company-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+.company-logo{
+
+    width:72px;
+
+    height:72px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:var(--white);
+
+    font-size:30px;
+
+    box-shadow:0 10px 20px rgba(13,39,61,.25);
+
+}
+
+.company-header h2{
+
+    margin:0;
+
+    font-size:28px;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+}
+
+.company-header h3{
+
+    margin-top:6px;
+
+    font-size:18px;
+
+    color:#666;
+
+    font-weight:500;
+
+}
+
+/* ===========================
+   INTERNSHIP DETAILS
+=========================== */
+
+.internship-details{
+
+    display:flex;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin:22px 0;
+
+}
+
+.internship-details span{
+
+    background:rgba(62,105,133,.10);
+
+    color:var(--primary);
+
+    padding:10px 18px;
+
+    border-radius:25px;
+
+    font-weight:600;
+
+    border:1px solid rgba(62,105,133,.15);
+
+}
+
+/* ===========================
+   SKILL BOX
+=========================== */
+
+.skill-box{
+
+    margin:20px 0;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    color:var(--white);
+
+    font-weight:600;
+
+    box-shadow:0 8px 18px rgba(13,39,61,.18);
+
+}
+/* ===========================
+   INTERNSHIP DESCRIPTION
+=========================== */
+
+.internship-description{
+
+    line-height:1.9;
+
+    margin-bottom:25px;
+
+    color:#555;
+
+    font-size:16px;
+
+}
+
+/* ===========================
+   BUTTON GROUP
+=========================== */
+
+.button-group{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+
+}
+
+.button-group button{
+
+    flex:1;
+
+    min-width:180px;
+
+}
+
+/* ===========================
+   READINESS SCORE
+=========================== */
+
+.score-section{
+
+    text-align:center;
+
+    margin:45px 0;
+
+}
+
+.score-circle{
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    color:var(--white);
+
+    font-size:44px;
+
+    font-weight:700;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    transition:all .4s ease;
+
+    box-shadow:0 18px 35px rgba(13,39,61,.22);
+
+}
+
+.score-circle:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 22px 40px rgba(13,39,61,.30);
+
+}
+/* ===========================
+   PROGRESS BAR
+=========================== */
+
+.progress-container{
+
+    width:80%;
+
+    height:16px;
+
+    background:#E5E7EB;
+
+    border-radius:25px;
+
+    margin:35px auto;
+
+    overflow:hidden;
+
+    box-shadow:inset 0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.progress-bar{
+
+    height:100%;
+
+    width:0;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    transition:width 1s ease;
+
+    border-radius:25px;
+
+}
+
+/* ===========================
+   RESULT CARDS
+=========================== */
+
+.results-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:25px;
+
+    margin-top:40px;
+
+}
+
+.result-card{
+
+    background:rgba(255,255,255,.96);
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 35px rgba(13,39,61,.12);
+
+    transition:all .35s ease;
+
+    border-left:5px solid var(--secondary);
+
+}
+
+.result-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 22px 45px rgba(13,39,61,.22);
+
+}
+
+.result-card h3{
+
+    color:var(--primary);
+
+    margin-bottom:15px;
+
+}
+
+.result-card p{
+
+    color:#555;
+
+    line-height:1.8;
+
+}
+.result-card h2{
+
+margin-bottom:20px;
+
+color:#4F46E5;
+
+}
+
+.completed{
+
+color:#22C55E;
+
+font-weight:600;
+
+margin:12px 0;
+
+}
+
+.missing{
+
+color:#EF4444;
+
+font-weight:600;
+
+margin:12px 0;
+
+}
+
+.suggestions{
+
+margin-top:35px;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+.suggestions li{
+
+margin:12px 0;
+
+font-size:17px;
+
+}
+
+#analysis{
+
+margin-top:20px;
+
+font-size:18px;
+
+line-height:40px;
+
+}
+/* ===========================
+   FAILURE ANALYSIS
+=========================== */
+
+#analysis p{
+
+    padding:18px;
+
+    background:rgba(255,255,255,.96);
+
+    border-left:5px solid var(--danger);
+
+    border-radius:12px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 10px 20px rgba(13,39,61,.10);
+
+    color:#555;
+
+    line-height:1.8;
+
+}
+
+/* ===========================
+   TIMELINE
+=========================== */
+
+.timeline{
+
+    width:75%;
+
+    margin:auto;
+
+}
+
+.timeline-item{
+
+    display:flex;
+
+    align-items:center;
+
+    margin:35px 0;
+
+    background:rgba(255,255,255,.96);
+
+    padding:22px;
+
+    border-radius:18px;
+
+    box-shadow:0 15px 30px rgba(13,39,61,.12);
+
+    transition:all .35s ease;
+
+}
+
+.timeline-item:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 22px 40px rgba(13,39,61,.20);
+
+}
+
+.circle{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-right:20px;
+
+    color:var(--white);
+
+}
+
+.completed .circle{
+
+    background:var(--success);
+
+}
+
+.pending .circle{
+
+    background:var(--warning);
+
+}
+
+.rejected .circle{
+
+    background:var(--danger);
+
+}
+
+.content h3{
+
+    margin:0;
+
+    font-size:22px;
+
+    color:var(--primary);
+
+}
+
+.content p{
+
+    margin-top:8px;
+
+    color:#666;
+
+    line-height:1.7;
+
+}
+
+/* ===========================
+   PAGE ANIMATION
+=========================== */
+
+body{
+
+    animation:fade .6s ease;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}

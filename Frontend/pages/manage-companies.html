@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Companies</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="admin-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="manage-students.html">
+        <i class="fa-solid fa-user-graduate"></i>
+        Manage Students
+    </a>
+
+    <a href="manage-companies.html">
+        <i class="fa-solid fa-building"></i>
+        Manage Companies
+    </a>
+
+    <a href="manage-admin-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="manage-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        Applications
+    </a>
+
+    <a href="admin-login.html">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+<h1>
+<i class="fa-solid fa-building"></i>
+Manage Companies
+</h1>
+
+<div id="companyList"></div>
+
+</div>
+
+<script>
+
+async function loadCompanies(){
+
+    const response=await fetch(
+    "http://localhost:8081/company/all"
+    );
+
+    const companies=await response.json();
+
+    let output="";
+
+    companies.forEach(company=>{
+
+        output+=`
+
+        <div class="internship-card">
+
+            <h2>
+
+                <i class="fa-solid fa-building"></i>
+
+                ${company.companyName}
+
+            </h2>
+
+            <p>
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <b>Email :</b>
+
+                ${company.email}
+
+            </p>
+
+            <p>
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <b>Location :</b>
+
+                ${company.location}
+
+            </p>
+
+            <p>
+
+                <i class="fa-solid fa-industry"></i>
+
+                <b>Industry :</b>
+
+                ${company.industry}
+
+            </p>
+
+            <button onclick="deleteCompany(${company.id})">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete Company
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("companyList").innerHTML=output;
+
+}
+
+async function deleteCompany(id){
+
+    if(!confirm("Delete this company?")) return;
+
+    const response=await fetch(
+
+    "http://localhost:8081/company/delete/"+id,
+
+    {
+
+        method:"DELETE"
+
+    });
+
+    if(response.ok){
+
+        alert("Company Deleted Successfully!");
+
+        loadCompanies();
+
+    }
+
+    else{
+
+        alert("Delete Failed!");
+
+    }
+
+}
+
+loadCompanies();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InternHub Login</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-box">
+
+        <h1>InternHub</h1>
+
+        <p>Welcome Back</p>
+
+        <form id="loginForm">
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter Email"
+                required>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+                required>
+
+            <button type="submit">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <div class="link">
+
+            <a href="register.html">
+
+                New User? Create Account
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.getElementById("loginForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const student={
+
+        email:document.getElementById("email").value,
+
+        password:document.getElementById("password").value
+
+    };
+
+    try{
+
+        const response=await fetch("http://localhost:8081/student/login",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(student)
+
+        });
+
+        if(response.ok){
+
+            const data=await response.json();
+
+            if(data!=null){
+
+                localStorage.setItem("studentId",data.id);
+                localStorage.setItem("studentName",data.name);
+                localStorage.setItem("studentEmail",data.email);
+
+                alert("Login Successful!");
+
+                window.location.href="dashboard.html";
+
+            }
+
+            else{
+
+                alert("Invalid Email or Password");
+
+            }
+
+        }
+
+        else{
+
+            alert("Login Failed!");
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Server Error!");
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

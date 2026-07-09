@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Applicants</title>
+
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-building"></i>
+        InternHub
+    </h2>
+
+    <a href="company-dashboard.html">Dashboard</a>
+
+    <a href="post-internship.html">Post Internship</a>
+
+    <a href="manage-internships.html">Manage Internships</a>
+
+    <a href="view-applicants.html">View Applicants</a>
+
+    <a href="company-login.html">Logout</a>
+
+</div>
+
+<div class="internships-container">
+
+    <h1>View Applicants</h1>
+
+    <div id="applicantList"></div>
+
+</div>
+
+<script>
+
+async function loadApplicants(){
+
+   const response = await fetch("http://localhost:8081/application/all");
+
+const applications = await response.json();
+    let output = "";
+
+    if(applications.length === 0){
+
+        output = "<h2>No Applications Found.</h2>";
+
+    }else{
+
+        for(const application of applications){
+
+            const studentRes = await fetch(
+                "http://localhost:8081/student/" + application.studentId
+            );
+
+            const student = await studentRes.json();
+
+            const internshipRes = await fetch(
+                "http://localhost:8081/api/internships/" + application.internshipId
+            );
+
+            const internship = await internshipRes.json();
+
+            output += `
+
+            <div class="internship-card">
+
+                <h2>${internship.title}</h2>
+
+                <p><b>Student :</b> ${student.name}</p>
+
+                <p><b>Email :</b> ${student.email}</p>
+
+                <p><b>Branch :</b> ${student.branch}</p>
+
+                <p><b>Status :</b> ${application.status}</p>
+
+                <button class="select-btn"
+                onclick="updateStatus(${application.id},'Selected')">
+
+                ✅ Select
+
+                </button>
+
+                <button class="reject-btn"
+                onclick="updateStatus(${application.id},'Rejected')">
+
+                ❌ Reject
+
+                </button>
+
+            </div>
+
+            `;
+
+        }
+
+    }
+
+    document.getElementById("applicantList").innerHTML = output;
+
+}
+
+async function updateStatus(id,status){
+
+    const response = await fetch(
+
+        "http://localhost:8081/application/status/" + id + "?status=" + status,
+
+        {
+
+            method:"PUT"
+
+        }
+
+    );
+
+    if(response.ok){
+
+        alert("Status Updated Successfully!");
+
+        loadApplicants();
+
+    }
+
+    else{
+
+        alert("Update Failed!");
+
+    }
+
+}
+
+loadApplicants();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Internship</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-building"></i>
+        InternHub
+    </h2>
+
+    <a href="company-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="post-internship.html">
+        <i class="fa-solid fa-plus"></i>
+        Post Internship
+    </a>
+
+    <a href="manage-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="view-applicants.html">
+        <i class="fa-solid fa-users"></i>
+        View Applicants
+    </a>
+
+    <a href="company-login.html">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+<h1>
+
+<i class="fa-solid fa-pen-to-square"></i>
+
+Edit Internship
+
+</h1>
+
+<div class="internship-card">
+
+<label>Internship Title</label>
+
+<input type="text" id="title">
+
+<br><br>
+
+<label>Company Name</label>
+
+<input type="text" id="company">
+
+<br><br>
+
+<label>Duration</label>
+
+<input type="text" id="duration">
+
+<br><br>
+
+<label>Monthly Stipend</label>
+
+<input type="number" id="stipend">
+
+<br><br>
+
+<label>Required Skills</label>
+
+<input type="text" id="skills">
+
+<br><br>
+
+<label>Description</label>
+
+<textarea id="description" rows="6"></textarea>
+
+<br><br>
+
+<button onclick="updateInternship()">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Update Internship
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const internshipId = params.get("id");
+
+async function loadInternship(){
+
+    const response = await fetch(
+        "http://localhost:8081/api/internships/" + internshipId
+    );
+
+    const internship = await response.json();
+
+    document.getElementById("title").value = internship.title;
+
+    document.getElementById("company").value = internship.company;
+
+    document.getElementById("duration").value = internship.duration;
+
+    document.getElementById("stipend").value = internship.stipend;
+
+    document.getElementById("skills").value = internship.requiredSkills;
+
+    document.getElementById("description").value = internship.description;
+
+}
+
+async function updateInternship(){
+
+    const internship={
+
+        title:document.getElementById("title").value,
+
+        company:document.getElementById("company").value,
+
+        duration:document.getElementById("duration").value,
+
+        stipend:parseFloat(document.getElementById("stipend").value),
+
+        requiredSkills:document.getElementById("skills").value,
+
+        description:document.getElementById("description").value
+
+    };
+
+    const response = await fetch(
+
+        "http://localhost:8081/api/internships/" + internshipId,
+
+        {
+
+            method:"PUT",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify(internship)
+
+        });
+
+    if(response.ok){
+
+        alert("✅ Internship Updated Successfully!");
+
+        window.location.href="manage-internships.html";
+
+    }
+
+    else{
+
+        alert("❌ Update Failed!");
+
+    }
+
+}
+
+loadInternship();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Profile</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="student-profile.html">
+        <i class="fa-solid fa-user"></i>
+        My Profile
+    </a>
+
+    <a href="readiness-score.html">
+        <i class="fa-solid fa-chart-line"></i>
+        Readiness Score
+    </a>
+
+    <a href="failure-analyzer.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        Failure Analyzer
+    </a>
+
+    <a href="timeline.html">
+        <i class="fa-solid fa-timeline"></i>
+        Journey Timeline
+    </a>
+
+    <a href="internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Internships
+    </a>
+
+    <a href="my-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        My Applications
+    </a>
+
+    <a href="login.html" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+<h1>
+<i class="fa-solid fa-user-pen"></i>
+My Profile
+</h1>
+
+<div class="internship-card">
+
+<label>
+<i class="fa-solid fa-user"></i>
+Full Name
+</label>
+
+<input
+type="text"
+id="name"
+placeholder="Enter your name">
+
+<br><br>
+
+<label>
+<i class="fa-solid fa-code-branch"></i>
+Branch
+</label>
+
+<input
+type="text"
+id="branch"
+placeholder="CSE">
+
+<br><br>
+
+<label>
+<i class="fa-solid fa-laptop-code"></i>
+Skills
+</label>
+
+<input
+type="text"
+id="skills"
+placeholder="Java, HTML, CSS, Spring Boot">
+
+<br><br>
+
+<label>
+<i class="fa-brands fa-github"></i>
+GitHub Link
+</label>
+
+<input
+type="text"
+id="githubLink"
+placeholder="https://github.com/username">
+
+<br><br>
+
+<label>
+<i class="fa-brands fa-linkedin"></i>
+LinkedIn Link
+</label>
+
+<input
+type="text"
+id="linkedinLink"
+placeholder="https://linkedin.com/in/username">
+
+<br><br>
+
+<label>
+<i class="fa-solid fa-file"></i>
+Resume Link
+</label>
+
+<input
+type="text"
+id="resume"
+placeholder="Google Drive Resume Link">
+
+<br><br>
+
+<button onclick="updateProfile()">
+
+<i class="fa-solid fa-floppy-disk"></i>
+
+Update Profile
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const studentId = localStorage.getItem("studentId");
+
+function logout(){
+
+localStorage.clear();
+
+window.location.href="login.html";
+
+}
+async function loadProfile(){
+
+    try{
+
+        const response = await fetch(
+            "http://localhost:8081/student/" + studentId
+        );
+
+        const student = await response.json();
+
+        document.getElementById("name").value =
+            student.name || "";
+
+        document.getElementById("branch").value =
+            student.branch || "";
+
+        document.getElementById("skills").value =
+            student.skills || "";
+
+        document.getElementById("githubLink").value =
+            student.githubLink || "";
+
+        document.getElementById("linkedinLink").value =
+            student.linkedinLink || "";
+
+        document.getElementById("resume").value =
+            student.resume || "";
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Unable to load profile.");
+
+    }
+
+}
+
+async function updateProfile(){
+
+    const student = {
+
+        name: document.getElementById("name").value,
+
+        branch: document.getElementById("branch").value,
+
+        skills: document.getElementById("skills").value,
+
+        githubLink: document.getElementById("githubLink").value,
+
+        linkedinLink: document.getElementById("linkedinLink").value,
+
+        resume: document.getElementById("resume").value
+
+    };
+
+    try{
+
+        const response = await fetch(
+
+            "http://localhost:8081/student/update/" + studentId,
+
+            {
+
+                method: "PUT",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body: JSON.stringify(student)
+
+            }
+
+        );
+
+        if(response.ok){
+
+            alert("✅ Profile Updated Successfully!");
+
+            loadProfile();
+
+        }
+
+        else{
+
+            alert("❌ Failed to Update Profile!");
+
+        }
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        alert("Server Error!");
+
+    }
+
+}
+
+loadProfile();
+
+</script>
+
+</body>
+</html>

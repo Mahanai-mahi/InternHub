@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Applications</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="admin-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="manage-students.html">
+        <i class="fa-solid fa-user-graduate"></i>
+        Manage Students
+    </a>
+
+    <a href="manage-companies.html">
+        <i class="fa-solid fa-building"></i>
+        Manage Companies
+    </a>
+
+    <a href="manage-admin-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="manage-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        Applications
+    </a>
+
+    <a href="admin-login.html">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+<h1>
+<i class="fa-solid fa-file-lines"></i>
+Manage Applications
+</h1>
+
+<div id="applicationList"></div>
+
+</div>
+
+<script>
+
+async function loadApplications(){
+
+    const applications =
+await fetch("http://localhost:8081/application/all")
+.then(res => res.json());
+
+const students =
+await fetch("http://localhost:8081/student/all")
+.then(res => res.json());
+
+const internships =
+await fetch("http://localhost:8081/api/internships")
+.then(res => res.json());
+    let output="";
+
+    applications.forEach(application=>{
+
+        const student=students.find(
+            s=>s.id===application.studentId);
+
+        const internship=internships.find(
+            i=>i.internshipId===application.internshipId);
+
+        let badgeClass="pending";
+
+        if(application.status==="Selected")
+            badgeClass="selected";
+
+        if(application.status==="Rejected")
+            badgeClass="rejected";
+
+        output+=`
+
+        <div class="internship-card">
+
+            <h2>
+
+                <i class="fa-solid fa-user"></i>
+
+                ${student?.name || "Unknown Student"}
+
+            </h2>
+
+            <p>
+
+                <i class="fa-solid fa-envelope"></i>
+
+                ${student?.email || "-"}
+
+            </p>
+
+            <p>
+
+                <i class="fa-solid fa-briefcase"></i>
+
+                ${internship?.title || "-"}
+
+            </p>
+
+            <p>
+
+                <i class="fa-solid fa-building"></i>
+
+                ${internship?.company || "-"}
+
+            </p>
+
+            <span class="status ${badgeClass}">
+                ${application.status}
+            </span>
+
+            <br><br>
+
+            <button class="select-btn"
+
+            onclick="updateStatus(${application.id},'Selected')">
+
+            <i class="fa-solid fa-check"></i>
+
+            Select
+
+            </button>
+
+            <button class="reject-btn"
+
+            onclick="updateStatus(${application.id},'Rejected')">
+
+            <i class="fa-solid fa-xmark"></i>
+
+            Reject
+
+            </button>
+
+            <button
+
+            onclick="deleteApplication(${application.id})">
+
+            <i class="fa-solid fa-trash"></i>
+
+            Delete
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("applicationList").innerHTML=output;
+
+}
+
+async function updateStatus(id,status){
+
+    await fetch(
+
+    `http://localhost:8081/application/status/${id}?status=${status}`,
+
+    {
+
+        method:"PUT"
+
+    });
+
+    loadApplications();
+
+}
+
+async function deleteApplication(id){
+
+    if(!confirm("Delete this application?")) return;
+
+    await fetch(
+
+    "http://localhost:8081/application/delete/"+id,
+
+    {
+
+        method:"DELETE"
+
+    });
+
+    loadApplications();
+
+}
+
+loadApplications();
+
+</script>
+
+</body>
+
+</html>

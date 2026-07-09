@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Internships</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="student-profile.html">
+        <i class="fa-solid fa-user"></i>
+        My Profile
+    </a>
+
+    <a href="readiness-score.html">
+        <i class="fa-solid fa-chart-line"></i>
+        Readiness Score
+    </a>
+
+    <a href="failure-analyzer.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        Failure Analyzer
+    </a>
+
+    <a href="timeline.html">
+        <i class="fa-solid fa-timeline"></i>
+        Journey Timeline
+    </a>
+
+    <a href="internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Internships
+    </a>
+
+    <a href="my-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        My Applications
+    </a>
+
+    <a href="login.html" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+<h1>
+<i class="fa-solid fa-briefcase"></i>
+Available Internships
+</h1>
+
+<div id="internshipList"></div>
+
+</div>
+
+<script>
+    function logout(){
+
+    localStorage.clear();
+
+    window.location.href="login.html";
+
+}
+
+async function loadInternships(){
+
+    const container = document.getElementById("internshipList");
+
+    try{
+
+        const response = await fetch("http://localhost:8081/api/internships");
+
+        if(!response.ok){
+            throw new Error("Failed to fetch internships");
+        }
+
+        const internships = await response.json();
+
+        container.innerHTML = "";
+
+        internships.forEach(internship=>{
+
+            container.innerHTML += `
+
+            <div class="internship-card">
+
+                <div class="company-header">
+
+                    <div class="company-logo">
+
+                        <i class="fa-solid fa-building"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2>${internship.title}</h2>
+
+                        <h3>${internship.company}</h3>
+
+                    </div>
+
+                </div>
+
+                <div class="internship-details">
+
+                    <span>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Remote
+
+                    </span>
+
+                    <span>
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        ${internship.duration}
+
+                    </span>
+
+                    <span>
+
+                        <i class="fa-solid fa-money-bill-wave"></i>
+
+                        ₹${internship.stipend}/month
+
+                    </span>
+
+                </div>
+
+                <div class="skill-box">
+
+                    <i class="fa-solid fa-code"></i>
+
+                    ${internship.requiredSkills}
+
+                </div>
+
+                <p class="internship-description">
+
+                    ${internship.description}
+
+                </p>
+
+                <div class="button-group">
+
+                    <button onclick="applyInternship(${internship.internshipId})">
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Apply Now
+
+                    </button>
+
+                    <button onclick="checkReadiness('${internship.requiredSkills}')">
+
+                        <i class="fa-solid fa-chart-line"></i>
+
+                        Check Readiness
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        container.innerHTML =
+        "<h2 style='color:white'>Unable to load internships.</h2>";
+
+    }
+
+}
+
+async function applyInternship(internshipId){
+
+    const application={
+
+        id:0,
+
+        studentId:Number(localStorage.getItem("studentId")),
+
+        internshipId:internshipId,
+
+        status:"Pending"
+
+    };
+
+    try{
+
+        const response =
+        await fetch("http://localhost:8081/application/add",{
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify(application)
+
+        });
+
+        if(response.ok){
+
+            alert("🎉 Application Submitted Successfully!");
+
+        }
+
+        else{
+
+            alert("Application Failed!");
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Server Error!");
+
+    }
+
+}
+
+function checkReadiness(requiredSkills){
+
+    localStorage.setItem("requiredSkills",requiredSkills);
+
+    window.location.href="readiness-score.html";
+
+}
+
+loadInternships();
+
+</script>
+
+</body>
+</html>

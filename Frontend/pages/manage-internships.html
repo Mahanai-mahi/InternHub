@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Internships</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-building"></i>
+        InternHub
+    </h2>
+
+    <a href="company-dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="post-internship.html">
+        <i class="fa-solid fa-plus"></i>
+        Post Internship
+    </a>
+
+    <a href="manage-internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Manage Internships
+    </a>
+
+    <a href="view-applicants.html">
+        <i class="fa-solid fa-users"></i>
+        View Applicants
+    </a>
+
+    <a href="company-login.html">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+<div class="internships-container">
+
+    <h1>Manage Internships</h1>
+
+    <div id="internshipList"></div>
+
+</div>
+
+<script>
+
+async function loadInternships() {
+
+   const response = await fetch("http://localhost:8081/api/internships");
+    const internships = await response.json();
+
+    if(internships.length === 0){
+
+        document.getElementById("internshipList").innerHTML =
+        "<h2>No internships available.</h2>";
+
+        return;
+
+    }
+
+    let output = "";
+
+    internships.forEach(internship => {
+
+        output += `
+
+        <div class="internship-card">
+
+            <h2>${internship.title}</h2>
+
+            <p><b>Company:</b> ${internship.company}</p>
+
+            <p><b>Duration:</b> ${internship.duration}</p>
+
+            <p><b>Stipend:</b> ₹${internship.stipend}</p>
+
+            <p><b>Skills:</b> ${internship.requiredSkills}</p>
+
+            <p>${internship.description}</p>
+
+            <button onclick="editInternship(${internship.internshipId})">
+                ✏ Edit
+            </button>
+
+            <button onclick="deleteInternship(${internship.internshipId})">
+                🗑 Delete
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("internshipList").innerHTML = output;
+
+}
+
+function editInternship(id){
+
+    window.location.href = "edit-internship.html?id=" + id;
+
+}
+
+async function deleteInternship(id){
+
+    if(!confirm("Are you sure you want to delete this internship?")){
+
+        return;
+
+    }
+
+  const response = await fetch(
+    "http://localhost:8081/api/internships/" + id,
+    {
+        method: "DELETE"
+    }
+);
+
+    if(response.ok){
+
+        alert("Internship Deleted Successfully!");
+
+        loadInternships();
+
+    }
+
+    else{
+
+        alert("Delete Failed!");
+
+    }
+
+}
+
+loadInternships();
+
+</script>
+
+</body>
+</html>

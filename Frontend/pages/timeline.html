@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Journey Timeline</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2><i class="fa-solid fa-graduation-cap"></i> InternHub</h2>
+
+<a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+
+<a href="student-profile.html"><i class="fa-solid fa-user"></i> My Profile</a>
+
+<a href="readiness-score.html"><i class="fa-solid fa-chart-line"></i> Readiness Score</a>
+
+<a href="failure-analyzer.html"><i class="fa-solid fa-chart-pie"></i> Failure Analyzer</a>
+
+<a href="timeline.html"><i class="fa-solid fa-timeline"></i> Journey Timeline</a>
+
+<a href="internships.html"><i class="fa-solid fa-briefcase"></i> Internships</a>
+
+<a href="my-applications.html"><i class="fa-solid fa-file-lines"></i> My Applications</a>
+
+</div>
+
+<div class="readiness-container">
+
+<h1>
+
+<i class="fa-solid fa-road"></i>
+
+My Internship Journey
+
+</h1>
+
+<div class="timeline" id="timeline"></div>
+
+</div>
+<script>
+
+const studentId = Number(localStorage.getItem("studentId"));
+
+async function loadTimeline(){
+
+    try{
+
+        // Student
+        const student =
+        await fetch("http://localhost:8081/student/" + studentId)
+        .then(res=>res.json());
+
+        // Applications
+        const applications =
+        await fetch("http://localhost:8081/application/all")
+        .then(res=>res.json());
+
+        // Internships
+        const internships =
+        await fetch("http://localhost:8081/api/internships")
+        .then(res=>res.json());
+
+        const myApps =
+        applications.filter(app=>app.studentId==studentId);
+
+        let html="";
+
+        // Registration
+
+        html+=`
+        <div class="timeline-item completed">
+
+            <div class="circle">✓</div>
+
+            <div class="content">
+
+                <h3>Student Registered</h3>
+
+                <p>Your InternHub account has been created.</p>
+
+            </div>
+
+        </div>
+        `;
+
+        // Profile
+
+        if(student.skills && student.skills.trim()!=""){
+
+            html+=`
+            <div class="timeline-item completed">
+
+                <div class="circle">✓</div>
+
+                <div class="content">
+
+                    <h3>Profile Completed</h3>
+
+                    <p>Your profile is ready for internship applications.</p>
+
+                </div>
+
+            </div>
+            `;
+
+        }else{
+
+            html+=`
+            <div class="timeline-item pending">
+
+                <div class="circle">!</div>
+
+                <div class="content">
+
+                    <h3>Profile Incomplete</h3>
+
+                    <p>Please add skills and upload your resume.</p>
+
+                </div>
+
+            </div>
+            `;
+
+        }
+
+        // Applications
+
+        if(myApps.length==0){
+
+            html+=`
+            <div class="timeline-item pending">
+
+                <div class="circle">📄</div>
+
+                <div class="content">
+
+                    <h3>No Internship Applied</h3>
+
+                    <p>Start applying for internships.</p>
+
+                </div>
+
+            </div>
+            `;
+
+        }
+
+        for(const app of myApps){
+
+            const internship =
+            internships.find(i=>i.internshipId==app.internshipId);
+
+            html+=`
+            <div class="timeline-item completed">
+
+                <div class="circle">💼</div>
+
+                <div class="content">
+
+                    <h3>Applied for Internship</h3>
+
+                    <p>
+
+                    ${internship ? internship.title : "Internship"}
+
+                    (${internship ? internship.company : ""})
+
+                    </p>
+
+                </div>
+
+            </div>
+            `;
+
+            if(app.status==="Pending"){
+
+                html+=`
+                <div class="timeline-item pending">
+
+                    <div class="circle">⌛</div>
+
+                    <div class="content">
+
+                        <h3>Application Under Review</h3>
+
+                        <p>The company is reviewing your application.</p>
+
+                    </div>
+
+                </div>
+                `;
+
+            }
+
+            if(app.status==="Rejected"){
+
+                html+=`
+                <div class="timeline-item rejected">
+
+                    <div class="circle">✖</div>
+
+                    <div class="content">
+
+                        <h3>Application Rejected</h3>
+
+                        <p>
+
+                        Improve your profile and apply again.
+
+                        </p>
+
+                    </div>
+
+                </div>
+                `;
+
+            }
+
+            if(app.status==="Selected"){
+
+                html+=`
+                <div class="timeline-item completed">
+
+                    <div class="circle">🏆</div>
+
+                    <div class="content">
+
+                        <h3>Congratulations!</h3>
+
+                        <p>
+
+                        You have been selected for
+
+                        ${internship ? internship.title : "the internship"}.
+
+                        </p>
+
+                    </div>
+
+                </div>
+                `;
+
+            }
+
+        }
+
+        document.getElementById("timeline").innerHTML=html;
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+loadTimeline();
+
+</script>
+
+
+</body>
+
+</html>

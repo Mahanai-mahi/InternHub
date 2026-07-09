@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Dashboard</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>
+        <i class="fa-solid fa-graduation-cap"></i>
+        InternHub
+    </h2>
+
+    <a href="dashboard.html">
+        <i class="fa-solid fa-house"></i>
+        Dashboard
+    </a>
+
+    <a href="student-profile.html">
+        <i class="fa-solid fa-user"></i>
+        My Profile
+    </a>
+
+    <a href="readiness-score.html">
+        <i class="fa-solid fa-chart-line"></i>
+        Readiness Score
+    </a>
+
+    <a href="failure-analyzer.html">
+        <i class="fa-solid fa-chart-pie"></i>
+        Failure Analyzer
+    </a>
+
+    <a href="timeline.html">
+        <i class="fa-solid fa-timeline"></i>
+        Journey Timeline
+    </a>
+
+    <a href="internships.html">
+        <i class="fa-solid fa-briefcase"></i>
+        Internships
+    </a>
+
+    <a href="my-applications.html">
+        <i class="fa-solid fa-file-lines"></i>
+        My Applications
+    </a>
+
+</div>
+
+<div class="dashboard">
+
+    <h1>
+        👋 Welcome Back,
+        <span id="studentName">Student</span>
+    </h1>
+
+    <p class="dashboard-subtitle">
+        Keep learning and apply for more internships.
+    </p>
+
+    <div class="dashboard-cards">
+
+        <div class="card internship">
+
+            <i class="fa-solid fa-briefcase dashboard-icon"></i>
+
+            <h2 id="availableCount">0</h2>
+
+            <p>Available Internships</p>
+
+        </div>
+
+        <div class="card applied">
+
+            <i class="fa-solid fa-file-lines dashboard-icon"></i>
+
+            <h2 id="applicationCount">0</h2>
+
+            <p>Applications</p>
+
+        </div>
+
+        <div class="card selected">
+
+            <i class="fa-solid fa-circle-check dashboard-icon"></i>
+
+            <h2 id="selectedCount">0</h2>
+
+            <p>Selected</p>
+
+        </div>
+
+        <div class="card rejected">
+
+            <i class="fa-solid fa-circle-xmark dashboard-icon"></i>
+
+            <h2 id="rejectedCount">0</h2>
+
+            <p>Rejected</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function loadDashboard(){
+
+    const studentId = localStorage.getItem("studentId");
+
+    if(studentId){
+
+        const student = await fetch(
+            "http://localhost:8081/student/" + studentId
+        ).then(res=>res.json());
+
+        document.getElementById("studentName").innerHTML =
+            student.name;
+
+    }
+    const internships =
+await fetch("http://localhost:8081/api/internships")
+.then(res=>res.json());
+    document.getElementById("availableCount").innerHTML =
+    internships.length;
+
+    const applications =
+    await fetch("http://localhost:8081/application/all")
+    .then(res=>res.json());
+
+    const myApplications =
+    applications.filter(app=>app.studentId==studentId);
+
+    document.getElementById("applicationCount").innerHTML =
+    myApplications.length;
+
+    document.getElementById("selectedCount").innerHTML =
+    myApplications.filter(app=>app.status=="Selected").length;
+
+    document.getElementById("rejectedCount").innerHTML =
+    myApplications.filter(app=>app.status=="Rejected").length;
+
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+
+</html>

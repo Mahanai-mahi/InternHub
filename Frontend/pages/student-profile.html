@@ -175,7 +175,7 @@ async function loadProfile(){
     try{
 
         const response = await fetch(
-            "http://localhost:8081/student/" + studentId
+            "https://internhub-production-dd96.up.railway.app/student/" + studentId
         );
 
         const student = await response.json();
@@ -232,7 +232,7 @@ async function updateProfile(){
 
         const response = await fetch(
 
-            "http://localhost:8081/student/update/" + studentId,
+            "https://internhub-production-dd96.up.railway.app/student/update/" + studentId,
 
             {
 

@@ -83,7 +83,7 @@ async function loadDashboard() {
 
         // Total Internships
        const internshipResponse =
-    await fetch("http://localhost:8081/api/internships");
+    await fetch("https://internhub-production-dd96.up.railway.app/api/internships");
         const internships =
             await internshipResponse.json();
 
@@ -92,7 +92,7 @@ async function loadDashboard() {
 
         // Total Applications
         const applicationResponse =
-            await fetch("http://localhost:8081/application/all");
+            await fetch("https://internhub-production-dd96.up.railway.app/application/all");
 
         const applications =
             await applicationResponse.json();

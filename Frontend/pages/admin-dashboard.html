@@ -121,16 +121,16 @@ async function loadDashboard(){
 
     try{
 
-        const students = await fetch("http://localhost:8081/student/all");
+        const students = await fetch("https://internhub-production-dd96.up.railway.app/student/all");
         console.log("Students:", students.status);
 
-        const companies = await fetch("http://localhost:8081/company/all");
+        const companies = await fetch("https://internhub-production-dd96.up.railway.app/company/all");
         console.log("Companies:", companies.status);
 
-        const internships = await fetch("http://localhost:8081/api/internships");
+        const internships = await fetch("https://internhub-production-dd96.up.railway.app/api/internships");
         console.log("Internships:", internships.status);
 
-        const applications = await fetch("http://localhost:8081/application/all");
+        const applications = await fetch("https://internhub-production-dd96.up.railway.app/application/all");
         console.log("Applications:", applications.status);
 
         const studentData = await students.json();

@@ -19,6 +19,11 @@
     --white:#FFFFFF;
 
     --black:#111827;
+    --success:#2E8B57;
+--danger:#D9534F;
+--warning:#F59E0B;
+--info:#3E6985;
+--glass:rgba(255,255,255,.18);
 
 }
 
@@ -33,29 +38,52 @@
     font-family:'Poppins',sans-serif;
 
 }
-
+ html{
+    scroll-behavior:smooth;
+}
 body{
-
     min-height:100vh;
-
     margin:0;
-
     display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:linear-gradient(135deg,
+    flex-direction:column;
+    background:linear-gradient(
+        135deg,
         var(--primary),
         var(--secondary),
         var(--accent),
-        var(--light));
-
+        var(--light)
+    );
     background-size:300% 300%;
-
     animation:gradientBG 10s ease infinite;
+    overflow-x:hidden;
+    color:var(--white);
+}
 
+
+.hero{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:80vh;
+    text-align:center;
+    padding:80px 10%;
+}
+
+.hero-text{
+    max-width:700px;
+}
+
+.hero-text h1{
+    font-size:60px;
+    color:white;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    font-size:22px;
+    color:#dbe7f3;
+    line-height:1.6;
+    margin-bottom:30px;
 }
 
 @keyframes gradientBG{
@@ -75,17 +103,12 @@ body{
 }
 
 .container{
-
     width:100%;
-
+    min-height:100vh;
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:20px;
-
 }
 
 .form-box{
@@ -98,7 +121,8 @@ body{
 
     border:1px solid rgba(255,255,255,.35);
 
-    backdrop-filter:blur(18px);
+  backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
 
     border-radius:22px;
 
@@ -343,7 +367,7 @@ form button:active{
     background:rgba(255,255,255,.18);
 
     backdrop-filter:blur(18px);
-
+    -webkit-backdrop-filter:blur(18px);
     border:1px solid rgba(255,255,255,.35);
 
     color:var(--white);
@@ -380,6 +404,14 @@ form button:active{
 
 }
 
+.glass-card{
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.35);
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(13,39,61,.25);
+}
 /* ===========================
    FEATURES SECTION
 =========================== */
@@ -407,35 +439,23 @@ form button:active{
 }
 
 .feature-container{
-
     display:flex;
-
     justify-content:center;
-
+    align-items:stretch;
     gap:30px;
-
     flex-wrap:wrap;
-
 }
 
 .feature-card{
-
     width:320px;
-
     padding:35px;
-
     border-radius:25px;
-
     background:rgba(255,255,255,.18);
-
     backdrop-filter:blur(18px);
-
+    -webkit-backdrop-filter:blur(18px);
     border:1px solid rgba(255,255,255,.35);
-
     box-shadow:0 12px 30px rgba(13,39,61,.18);
-
     transition:all .35s ease;
-
 }
 
 .feature-card:hover{
@@ -530,6 +550,7 @@ form button:active{
     background:rgba(255,255,255,.18);
 
     backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
 
     color:var(--white);
 
@@ -587,33 +608,22 @@ form button:active{
 =========================== */
 
 .footer{
-
     background:rgba(13,39,61,.92);
-
     backdrop-filter:blur(15px);
-
+    -webkit-backdrop-filter:blur(15px);
     color:var(--white);
-
     padding-top:60px;
-
     margin-top:60px;
-
     box-shadow:0 -8px 25px rgba(13,39,61,.25);
-
 }
 
 .footer-container{
-
     display:flex;
-
     justify-content:space-around;
-
+    align-items:flex-start;
     flex-wrap:wrap;
-
     gap:40px;
-
     padding:20px 50px;
-
 }
 
 .footer-box{
@@ -706,28 +716,14 @@ form button:active{
 /* ===========================
    STICKY NAVBAR
 =========================== */
-
 .navbar.sticky{
-
     background:rgba(13,39,61,.95);
-
     backdrop-filter:blur(15px);
-
+    -webkit-backdrop-filter:blur(15px);
     box-shadow:0 8px 25px rgba(13,39,61,.25);
-
     transition:all .35s ease;
-
 }
 
-/* ===========================
-   SMOOTH SCROLL
-=========================== */
-
-html{
-
-    scroll-behavior:smooth;
-
-}
 
 /* ===========================
    REVEAL ANIMATION
@@ -801,25 +797,16 @@ html{
 /* Dashboard Card */
 
 .card{
-
     padding:30px;
-
     border-radius:20px;
-
     background:rgba(255,255,255,.92);
-
     backdrop-filter:blur(15px);
-
+    -webkit-backdrop-filter:blur(15px);
     box-shadow:0 15px 30px rgba(13,39,61,.12);
-
     transition:all .35s ease;
-
     text-align:center;
-
     overflow:hidden;
-
     position:relative;
-
 }
 
 .card:hover{
@@ -856,31 +843,6 @@ html{
 
 }
 
-/* Numbers */
-
-.dashboard .card h2{
-
-    font-size:42px;
-
-    margin-bottom:12px;
-
-    color:var(--primary);
-
-    font-weight:700;
-
-}
-
-/* Card Text */
-
-.dashboard .card p{
-
-    font-size:17px;
-
-    color:#555;
-
-    font-weight:500;
-
-}
 /* ===========================
    DASHBOARD CARD HOVER
 =========================== */
@@ -918,25 +880,10 @@ html{
 /* Force Dashboard Cards */
 
 .dashboard .card{
-
-    background:rgba(255,255,255,.95) !important;
-
-    color:var(--black) !important;
-
-    padding:25px !important;
-
-    border-radius:20px !important;
-
-    min-height:170px;
-
-    display:block !important;
-
-    border:none;
-
-    box-shadow:0 15px 30px rgba(13,39,61,.12);
-
-    transition:all .35s ease;
-
+    background:rgba(255,255,255,.95);
+    color:var(--black);
+    padding:25px;
+    border-radius:20px;
 }
 
 .dashboard .card:hover{
@@ -1076,17 +1023,13 @@ html{
 /* Suggestions */
 
 .suggestions{
-
     margin-top:45px;
-
     background:rgba(255,255,255,.85);
-
     padding:25px;
-
     border-radius:18px;
-
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
     box-shadow:0 12px 25px rgba(13,39,61,.12);
-
 }
 
 .suggestions h2{
@@ -1129,6 +1072,7 @@ html{
     border-radius:22px;
 
     backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
     border:1px solid rgba(255,255,255,.35);
 
@@ -1341,21 +1285,14 @@ html{
 =========================== */
 
 .content{
-
     background:rgba(255,255,255,.92);
-
     padding:20px 25px;
-
     border-radius:18px;
-
     backdrop-filter:blur(18px);
-
+    -webkit-backdrop-filter:blur(18px);
     box-shadow:0 12px 25px rgba(13,39,61,.12);
-
     color:var(--black);
-
     transition:all .35s ease;
-
 }
 
 .content:hover{
@@ -1371,25 +1308,17 @@ html{
 =========================== */
 
 .sidebar{
-
     position:fixed;
-
     left:0;
-
     top:0;
-
     width:270px;
-
     height:100vh;
-
-    background:var(--primary);
-
+    background:rgba(13,39,61,.95);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
     color:var(--white);
-
     padding:30px 20px;
-
     box-shadow:8px 0 25px rgba(13,39,61,.25);
-
 }
 
 .sidebar h2{
@@ -1433,13 +1362,9 @@ html{
 }
 
 .sidebar a:hover{
-
-    background:var(--secondary);
-
+    background:rgba(62,105,133,.85);
     transform:translateX(8px);
-
     box-shadow:0 8px 20px rgba(62,105,133,.35);
-
 }
 
 .sidebar i{
@@ -1468,33 +1393,24 @@ html{
 =========================== */
 
 .internships-container{
-
     margin-left:290px;
-
     padding:50px;
-
     background:var(--background);
-
     min-height:100vh;
-
+    display:flex;
+    flex-direction:column;
+    gap:30px;
 }
 
 .internship-card{
-
     background:rgba(255,255,255,.95);
-
     border-radius:22px;
-
     padding:30px;
-
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
     box-shadow:0 15px 35px rgba(13,39,61,.12);
-
     transition:all .35s ease;
-
-    margin-bottom:30px;
-
     border-left:6px solid var(--primary);
-
 }
 
 .internship-card:hover{
@@ -1818,178 +1734,18 @@ html{
     box-shadow:0 12px 25px rgba(217,83,79,.35);
 
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
 /* ===========================
    INTERNHUB THEME VARIABLES
 =========================== */
 
-:root{
 
-    --primary:#0D273D;
-
-    --secondary:#3E6985;
-
-    --accent:#8AA7BC;
-
-    --light:#A6BED1;
-
-    --background:#CDD7DF;
-
-    --white:#FFFFFF;
-
-    --black:#111827;
-
-    --success:#2E8B57;
-
-    --danger:#D9534F;
-
-    --warning:#F59E0B;
-
-    --info:#3E6985;
-
-    --glass:rgba(255,255,255,.18);
-
-}
 
 /* ===========================
    SIDEBAR
 =========================== */
-
-.sidebar{
-
-    width:260px;
-
-    background:var(--primary);
-
-    backdrop-filter:blur(18px);
-
-    border-right:1px solid rgba(255,255,255,.12);
-
-    box-shadow:8px 0 25px rgba(13,39,61,.25);
-
-}
-
-.sidebar h2{
-
-    font-size:32px;
-
-    text-align:center;
-
-    margin-bottom:40px;
-
-    color:var(--white);
-
-    letter-spacing:1px;
-
-}
-
-.sidebar a{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:14px 18px;
-
-    border-radius:12px;
-
-    margin-bottom:12px;
-
-    font-size:16px;
-
-    font-weight:500;
-
-    color:var(--white);
-
-    text-decoration:none;
-
-    transition:all .35s ease;
-
-}
-
-.sidebar a:hover{
-
-    background:linear-gradient(
-        135deg,
-        var(--secondary),
-        var(--accent)
-    );
-
-    transform:translateX(8px);
-
-    box-shadow:0 8px 18px rgba(62,105,133,.30);
-
-}
 /* ===========================
    DASHBOARD
 =========================== */
-
-.dashboard{
-
-    margin-left:290px;
-
-    padding:50px;
-
-    background:var(--background);
-
-    min-height:100vh;
-
-}
-
-.dashboard h1{
-
-    color:var(--primary);
-
-    margin-bottom:35px;
-
-    font-size:38px;
-
-    font-weight:700;
-
-}
-
-/* Dashboard Cards */
-
-.dashboard-cards{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-
-    gap:25px;
-
-}
-
-.dashboard .card{
-
-    background:rgba(255,255,255,.95);
-
-    color:var(--black);
-
-    border-radius:22px;
-
-    padding:30px;
-
-    box-shadow:0 15px 35px rgba(13,39,61,.15);
-
-    transition:all .35s ease;
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.dashboard .card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:0 22px 45px rgba(13,39,61,.25);
-
-}
 
 .dashboard .card::before{
 
@@ -2033,85 +1789,6 @@ html{
 
 }
 
-.dashboard .card h2{
-
-    font-size:46px;
-
-    color:var(--primary);
-
-    margin-bottom:10px;
-
-    font-weight:700;
-
-}
-
-.dashboard .card p{
-
-    color:#555;
-
-    font-size:17px;
-
-    line-height:1.6;
-
-}
-/* ===========================
-   INTERNSHIP CARD
-=========================== */
-
-.internship-card{
-
-    background:rgba(255,255,255,.95);
-
-    border-radius:22px;
-
-    padding:30px;
-
-    margin-bottom:30px;
-
-    transition:all .35s ease;
-
-    border-left:6px solid var(--primary);
-
-    box-shadow:0 15px 35px rgba(13,39,61,.15);
-
-}
-
-.internship-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 22px 45px rgba(13,39,61,.25);
-
-}
-
-.internship-card h2,
-.internship-card h3{
-
-    color:var(--primary);
-
-    margin-bottom:15px;
-
-    font-size:26px;
-
-    font-weight:700;
-
-}
-
-.internship-card p{
-
-    color:#555;
-
-    line-height:1.8;
-
-    font-size:16px;
-
-}
-
-.internship-card strong{
-
-    color:var(--secondary);
-
-}
 
 .internship-card hr{
 
@@ -2128,7 +1805,7 @@ html{
    GLOBAL BUTTONS
 =========================== */
 
-button{
+.btn-primary{
 
     background:linear-gradient(
         135deg,
@@ -2156,7 +1833,7 @@ button{
 
 }
 
-button:hover{
+.btn-primary:hover{
 
     background:linear-gradient(
         135deg,
@@ -2214,48 +1891,6 @@ textarea::placeholder{
     color:#8b97a3;
 
 }
-/* ===========================
-   READINESS SCORE
-=========================== */
-
-.score-circle{
-
-    width:190px;
-
-    height:190px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:46px;
-
-    font-weight:700;
-
-    background:linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-    );
-
-    color:var(--white);
-
-    box-shadow:0 18px 35px rgba(13,39,61,.22);
-
-    transition:all .35s ease;
-
-}
-
-.score-circle:hover{
-
-    transform:scale(1.05);
-
-}
-
 /* ===========================
    TABLES
 =========================== */
@@ -2339,63 +1974,12 @@ table tr:hover{
    SIDEBAR ICONS
 =========================== */
 
-.sidebar a i{
 
-    width:22px;
-
-    margin-right:10px;
-
-    font-size:18px;
-
-    color:var(--white);
-
-}
 
 /* ===========================
    DASHBOARD ICONS
 =========================== */
 
-.dashboard .card{
-
-    text-align:center;
-
-}
-
-.dashboard .card i{
-
-    color:var(--secondary);
-
-    margin-bottom:15px;
-
-    font-size:40px;
-
-}
-
-.dashboard .card h2{
-
-    font-size:48px;
-
-    margin:15px 0 10px;
-
-    color:var(--primary);
-
-}
-
-.dashboard .card:hover{
-
-    transform:translateY(-10px);
-
-}
-
-.dashboard h1{
-
-    font-size:38px;
-
-    font-weight:700;
-
-    color:var(--primary);
-
-}
 
 /* Logo Icon */
 
@@ -2443,17 +2027,6 @@ table tr:hover{
 
 }
 
-.internship-card button:hover{
-
-    background:linear-gradient(
-        135deg,
-        var(--secondary),
-        var(--accent)
-    );
-
-    transform:translateY(-3px);
-
-}
 /* ===========================
    INTERNSHIP DETAILS
 =========================== */
@@ -2482,21 +2055,6 @@ table tr:hover{
 
 }
 
-.internship-card p{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin:12px 0;
-
-    color:#555;
-
-    line-height:1.7;
-
-}
 
 .internship-card p i{
 
@@ -2666,12 +2224,6 @@ table tr:hover{
 }
 
 /* Common Button Spacing */
-
-button{
-
-    margin-right:10px;
-
-}
 /* ===========================
    DASHBOARD HEADER
 =========================== */
@@ -2706,33 +2258,7 @@ button{
 
 /* ===========================
    DASHBOARD CARD TEXT
-=========================== */
-
-.card{
-
-    text-align:center;
-
-}
-
-.card h2{
-
-    font-size:48px;
-
-    margin:15px 0;
-
-    color:var(--primary);
-
-    font-weight:700;
-
-}
-
-.card p{
-
-    color:#555;
-
-    font-size:17px;
-
-}
+===========================
 /* ===========================
    COMPANY HEADER
 =========================== */
@@ -2910,47 +2436,7 @@ button{
 
 }
 
-.score-circle{
 
-    width:180px;
-
-    height:180px;
-
-    border-radius:50%;
-
-    background:linear-gradient(
-        135deg,
-        var(--primary),
-        var(--secondary)
-    );
-
-    color:var(--white);
-
-    font-size:44px;
-
-    font-weight:700;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin:auto;
-
-    transition:all .4s ease;
-
-    box-shadow:0 18px 35px rgba(13,39,61,.22);
-
-}
-
-.score-circle:hover{
-
-    transform:scale(1.05);
-
-    box-shadow:0 22px 40px rgba(13,39,61,.30);
-
-}
 /* ===========================
    PROGRESS BAR
 =========================== */
@@ -3053,27 +2539,6 @@ margin-bottom:20px;
 color:#4F46E5;
 
 }
-
-.completed{
-
-color:#22C55E;
-
-font-weight:600;
-
-margin:12px 0;
-
-}
-
-.missing{
-
-color:#EF4444;
-
-font-weight:600;
-
-margin:12px 0;
-
-}
-
 .suggestions{
 
 margin-top:35px;
@@ -3133,71 +2598,6 @@ line-height:40px;
    TIMELINE
 =========================== */
 
-.timeline{
-
-    width:75%;
-
-    margin:auto;
-
-}
-
-.timeline-item{
-
-    display:flex;
-
-    align-items:center;
-
-    margin:35px 0;
-
-    background:rgba(255,255,255,.96);
-
-    padding:22px;
-
-    border-radius:18px;
-
-    box-shadow:0 15px 30px rgba(13,39,61,.12);
-
-    transition:all .35s ease;
-
-}
-
-.timeline-item:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:0 22px 40px rgba(13,39,61,.20);
-
-}
-
-.circle{
-
-    width:60px;
-
-    height:60px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:24px;
-
-    font-weight:700;
-
-    margin-right:20px;
-
-    color:var(--white);
-
-}
-
-.completed .circle{
-
-    background:var(--success);
-
-}
 
 .pending .circle{
 

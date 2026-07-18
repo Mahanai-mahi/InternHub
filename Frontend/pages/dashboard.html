@@ -126,7 +126,7 @@ async function loadDashboard(){
     if(studentId){
 
         const student = await fetch(
-            "http://localhost:8081/student/" + studentId
+            "https://internhub-production-dd96.up.railway.app/student/" + studentId
         ).then(res=>res.json());
 
         document.getElementById("studentName").innerHTML =
@@ -134,13 +134,13 @@ async function loadDashboard(){
 
     }
     const internships =
-await fetch("http://localhost:8081/api/internships")
+await fetch("https://internhub-production-dd96.up.railway.app/api/internships")
 .then(res=>res.json());
     document.getElementById("availableCount").innerHTML =
     internships.length;
 
     const applications =
-    await fetch("http://localhost:8081/application/all")
+    await fetch("https://internhub-production-dd96.up.railway.app/application/all")
     .then(res=>res.json());
 
     const myApplications =

@@ -93,7 +93,7 @@ async function loadApplications() {
 
     try {
 
-        const response = await fetch("http://localhost:8081/application/all");
+        const response = await fetch("https://internhub-production-dd96.up.railway.app/application/all");
 
         if (!response.ok) {
 
@@ -118,7 +118,7 @@ async function loadApplications() {
         for (const application of myApplications) {
             
             const internshipResponse = await fetch(
-`http://localhost:8081/api/internships/${application.internshipId}`
+`https://internhub-production-dd96.up.railway.app/api/internships/${application.internshipId}`
 );
             if (!internshipResponse.ok) {
 

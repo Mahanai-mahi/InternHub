@@ -70,13 +70,13 @@ async function analyzeFailure(){
 
         // Load student
         const studentResponse =
-        await fetch("http://localhost:8081/student/" + studentId);
+        await fetch("https://internhub-production-dd96.up.railway.app/student/" + studentId);
 
         const student = await studentResponse.json();
 
         // Load all applications
         const applicationResponse =
-        await fetch("http://localhost:8081/application/all");
+        await fetch("https://internhub-production-dd96.up.railway.app/application/all");
 
         const applications =
         await applicationResponse.json();

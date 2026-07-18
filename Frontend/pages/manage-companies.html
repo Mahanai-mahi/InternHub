@@ -72,7 +72,7 @@ Manage Companies
 async function loadCompanies(){
 
     const response=await fetch(
-    "http://localhost:8081/company/all"
+    "https://internhub-production-dd96.up.railway.app/company/all"
     );
 
     const companies=await response.json();
@@ -147,7 +147,7 @@ async function deleteCompany(id){
 
     const response=await fetch(
 
-    "http://localhost:8081/company/delete/"+id,
+    "https://internhub-production-dd96.up.railway.app/company/delete/"+id,
 
     {
 

@@ -72,15 +72,15 @@ Manage Applications
 async function loadApplications(){
 
     const applications =
-await fetch("http://localhost:8081/application/all")
+await fetch("https://internhub-production-dd96.up.railway.app/application/all")
 .then(res => res.json());
 
 const students =
-await fetch("http://localhost:8081/student/all")
+await fetch("https://internhub-production-dd96.up.railway.app/student/all")
 .then(res => res.json());
 
 const internships =
-await fetch("http://localhost:8081/api/internships")
+await fetch("https://internhub-production-dd96.up.railway.app/api/internships")
 .then(res => res.json());
     let output="";
 
@@ -186,7 +186,7 @@ async function updateStatus(id,status){
 
     await fetch(
 
-    `http://localhost:8081/application/status/${id}?status=${status}`,
+    `https://internhub-production-dd96.up.railway.app/application/status/${id}?status=${status}`,
 
     {
 
@@ -204,7 +204,7 @@ async function deleteApplication(id){
 
     await fetch(
 
-    "http://localhost:8081/application/delete/"+id,
+    "https://internhub-production-dd96.up.railway.app/application/delete/"+id,
 
     {
 

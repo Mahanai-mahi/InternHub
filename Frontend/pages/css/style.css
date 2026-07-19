@@ -723,6 +723,59 @@ form button:active{
     box-shadow:0 8px 25px rgba(13,39,61,.25);
     transition:all .35s ease;
 }
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: transparent;
+    transition: all .35s ease;
+}
+
+.logo{
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.nav-links{
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links li{
+    list-style: none;
+}
+
+.nav-links a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.nav-links a:hover{
+    color: #4da3ff;
+}
+
+.login-btn{
+    color: white;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    background: #2563eb;
+    transition: .3s;
+}
+
+.login-btn:hover{
+    background: #1d4ed8;
+}
 
 
 /* ===========================

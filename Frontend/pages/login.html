@@ -60,75 +60,61 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 </div>
 
 <script>
-
-document.getElementById("loginForm").addEventListener("submit", async function(e){
+document.getElementById("loginForm").addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
-    const student={
-
-        email:document.getElementById("email").value,
-
-        password:document.getElementById("password").value
-
+    const student = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
     };
 
-    try{
+    try {
 
-        const response=await fetch("https://internhub-production-dd96.up.railway.app/student/login",{
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
+        const response = await fetch("https://internhub-production-dd96.up.railway.app/student/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-
-            body:JSON.stringify(student)
-
+            body: JSON.stringify(student)
         });
 
-        if(response.ok){
+        console.log("Status:", response.status);
 
-            const data=await response.json();
+        const text = await response.text();
+        console.log("Response Body:", text);
 
-            if(data!=null){
+        if (response.ok) {
 
-                localStorage.setItem("studentId",data.id);
-                localStorage.setItem("studentName",data.name);
-                localStorage.setItem("studentEmail",data.email);
-
-                alert("Login Successful!");
-
-                window.location.href="dashboard.html";
-
+            if (!text || text.trim() === "") {
+                alert("Server returned an empty response!");
+                return;
             }
 
-            else{
+            const data = JSON.parse(text);
 
-                alert("Invalid Email or Password");
+            localStorage.setItem("studentId", data.id);
+            localStorage.setItem("studentName", data.name);
+            localStorage.setItem("studentEmail", data.email);
 
-            }
+            alert("Login Successful!");
+
+            window.location.href = "dashboard.html";
+
+        } else {
+
+            alert("Login Failed!\n\nServer Response:\n" + text);
 
         }
 
-        else{
+    } catch (error) {
 
-            alert("Login Failed!");
-
-        }
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        alert("Server Error!");
+        console.error(error);
+        alert("Server Error!\n\n" + error.message);
 
     }
 
 });
-
 </script>
 
 </body>

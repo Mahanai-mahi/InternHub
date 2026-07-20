@@ -25,20 +25,21 @@ public class StudentController {
     }
 
     // Student Login
-    @PostMapping("/login")
-    public Student login(@RequestBody Student student) {
-
-        return service.login(student.getEmail(), student.getPassword());
-
-    }
 
     // Get All Students
-    @GetMapping("/all")
-    public List<Student> getAllStudents() {
+   @PostMapping("/login")
+public Student login(@RequestBody Student student) {
 
-        return service.getAllStudents();
+    System.out.println("===== LOGIN REQUEST =====");
+    System.out.println("Email: " + student.getEmail());
+    System.out.println("Password: " + student.getPassword());
 
-    }
+    Student result = service.login(student.getEmail(), student.getPassword());
+
+    System.out.println("Login Result: " + result);
+
+    return result;
+}
 
     // Get Student By ID
     @GetMapping("/{id}")

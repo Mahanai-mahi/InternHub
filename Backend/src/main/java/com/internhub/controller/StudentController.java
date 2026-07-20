@@ -16,54 +16,61 @@ public class StudentController {
     @Autowired
     private StudentService service;
 
+    // ==========================
     // Register Student
+    // ==========================
     @PostMapping("/register")
     public Student register(@RequestBody Student student) {
-
         return service.register(student);
-
     }
 
+    // ==========================
     // Student Login
+    // ==========================
+    @PostMapping("/login")
+    public Student login(@RequestBody Student student) {
 
+        System.out.println("===== LOGIN REQUEST =====");
+        System.out.println("Email: " + student.getEmail());
+        System.out.println("Password: " + student.getPassword());
+
+        Student result = service.login(student.getEmail(), student.getPassword());
+
+        System.out.println("Login Result: " + result);
+
+        return result;
+    }
+
+    // ==========================
     // Get All Students
-   @PostMapping("/login")
-public Student login(@RequestBody Student student) {
+    // ==========================
+    @GetMapping("/all")
+    public List<Student> getAllStudents() {
+        return service.getAllStudents();
+    }
 
-    System.out.println("===== LOGIN REQUEST =====");
-    System.out.println("Email: " + student.getEmail());
-    System.out.println("Password: " + student.getPassword());
-
-    Student result = service.login(student.getEmail(), student.getPassword());
-
-    System.out.println("Login Result: " + result);
-
-    return result;
-}
-
+    // ==========================
     // Get Student By ID
+    // ==========================
     @GetMapping("/{id}")
     public Student getStudent(@PathVariable int id) {
-
         return service.getStudentById(id);
-
     }
 
+    // ==========================
     // Update Student
+    // ==========================
     @PutMapping("/update/{id}")
     public Student updateStudent(@PathVariable int id,
                                  @RequestBody Student student) {
-
         return service.updateStudent(id, student);
-
     }
 
-    // ⭐ Delete Student
+    // ==========================
+    // Delete Student
+    // ==========================
     @DeleteMapping("/delete/{id}")
     public String deleteStudent(@PathVariable int id) {
-
         return service.deleteStudent(id);
-
     }
-
 }

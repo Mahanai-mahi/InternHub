@@ -24,14 +24,30 @@ public class StudentService {
     // Login
     public Student login(String email, String password) {
 
+        System.out.println("========== LOGIN REQUEST ==========");
+        System.out.println("Email Entered : " + email);
+
         Student student = repository.findByEmail(email);
 
-        if (student != null && student.getPassword().equals(password)) {
+        if (student == null) {
 
+            System.out.println("Student not found in database.");
+            return null;
+
+        }
+
+        System.out.println("Student Found : " + student.getName());
+        System.out.println("Database Password : " + student.getPassword());
+        System.out.println("Entered Password : " + password);
+
+        if (student.getPassword().equals(password)) {
+
+            System.out.println("Login Successful");
             return student;
 
         }
 
+        System.out.println("Incorrect Password");
         return null;
 
     }
@@ -72,7 +88,7 @@ public class StudentService {
 
     }
 
-    // ⭐ Delete Student
+    // Delete Student
     public String deleteStudent(int id) {
 
         repository.deleteById(id);
